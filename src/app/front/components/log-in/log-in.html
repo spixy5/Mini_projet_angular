@@ -1,1 +1,55 @@
-<p>log-in works!</p>
+<div class="login-component">
+  <div class="login-info">
+    <h2>Connexion à votre espace</h2>
+    <p class="subtext">Retrouvez vos musées favoris, votre historique de visites et vos statistiques en quelques clics.</p>
+
+    <div class="login-form-card">
+      <div class="login-form-header">Connexion</div>
+      <p class="login-form-subtext">Entrez vos identifiants pour accéder à la plateforme Musées de Tunisie.</p>
+
+      <form [formGroup]="loginForm">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="vous@example.com" autocomplete="username" />
+        @if(loginForm.get('email')?.invalid && loginForm.get('email')?.touched)
+        {<div class="error-message" >
+         <i class="bi bi-exclamation-triangle-fill"></i> Email invalide   
+            </div>   }   
+        <div class="password-row">
+          <label for="password">Mot de passe</label>
+         <a class="forgot-password" [routerLink]="['/forgot-password']">Mot de passe oublié ?</a>
+        </div>
+        <input type="password" id="password" formControlName="password" autocomplete="current-password" />
+           @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched)
+        {<div class="error-message">
+          <i class="bi bi-exclamation-triangle-fill"></i>  Mot de passe invalide
+            </div>}
+        <button type="button" class="btn-primary" (click)="login()">Se connecter</button>
+      </form>
+
+      <div class="separator">ou</div>
+
+      <div class="social-login">
+            <button class="btn-social btn-facebook" (click)="socialLogin('facebook')">
+        <i class="bi bi-facebook"></i> Continuer avec Facebook
+        </button>
+
+        <button class="btn-social btn-github" (click)="socialLogin('github')">
+        <i class="bi bi-github"></i> Continuer avec GitHub
+        </button>
+      </div>
+
+      <div class="signup-link">
+        Pas encore de compte ? <a routerLink="/signup">Créer un compte</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <img src="photos/myimage.png" alt="Musée Tunisie" />
+    <div class="info-overlay">
+      <div class="info-top-label">Plateforme nationale des musées</div>
+      <h3>Découvrez, suivez et valorisez le patrimoine tunisien</h3>
+      <p class="info-text">Statistiques en temps réel, tableaux de bord modernes et une expérience immersive pour chaque musée du pays.</p>
+    </div>
+  </div>
+</div>
