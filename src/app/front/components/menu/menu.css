@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+.navbar {
+  background-color: #fbfcfe;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #3a6a8c;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: #3a6a8c;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #2c526b;
+}
+
+.nav-links a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #3a6a8c;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-login, .btn-signup {
+  padding: 0.5rem 1.5rem;
+  border: 2px solid #3a6a8c;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-login {
+  background-color: #3a6a8c;
+  color: #fbfcfe;
+}
+
+.btn-login:hover {
+  background-color: #fbfcfe;
+  color: #3a6a8c;
+}
+
+.btn-signup {
+  background-color: #fbfcfe;
+  color: #3a6a8c;
+}
+
+.btn-signup:hover {
+  background-color: #3a6a8c;
+  color: #fbfcfe;
+}
