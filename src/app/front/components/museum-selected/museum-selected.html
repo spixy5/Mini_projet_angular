@@ -1,1 +1,55 @@
-<p>museum-selected works!</p>
+<div class="selected-museum-container container">
+  <section class="museum-detail-card card shadow-sm p-4">
+    <div class="museum-main d-flex flex-wrap gap-4">
+      <div class="museum-info flex-grow-1 d-flex flex-column justify-content-between">
+        <div class="left">
+          <div class="left-container">
+            <div class="museum-img-wrapper flex-shrink-0">
+              <img [src]="museum?.photo" class="museum-image" />
+            </div>
+            <div class="info">
+              <h1 class="museum-name">{{ museum?.name }}</h1>
+              <div class="museum-subtitle text-muted mb-3">
+                <span class="category">catégorie &middot;{{ museum?.category }}</span> &middot;
+              </div>
+              <p class="museum-description">{{ museum?.description }}</p>
+            </div>
+          </div>
+
+          <div class="museum-meta d-grid gap-3 grid-2-cols">
+            <div class="meta-item">
+              <label><i class="fas fa-map-marker-alt"></i> Adresse</label>
+              <p>{{ museum?.location }}</p>
+            </div>
+            <div class="meta-item">
+              <label><i class="fas fa-calendar-alt"></i> Fondé le</label>
+              <p>{{ museum?.created_at | date:'d MMMM yyyy' }}</p>
+            </div>
+            <div class="meta-item">
+              <label><i class="fas fa-ticket-alt"></i> Tarif</label>
+              <p>{{ museum?.entry_price }} DT</p>
+            </div>
+            <div class="meta-item">
+              <label><i class="fas fa-heartbeat"></i> Statut</label>
+              <p>{{ museum?.is_open ? 'Ouvert' : 'Fermé' }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="museum-actions mt-4 d-flex gap-3">
+                    <button class="btn btn-primary btn-visit" (click)="onVisitClick()">
+            Commencer la visite
+            </button>
+                    <button class="btn btn-outline-secondary btn-itinerary" (click)="onItineraryClick(museum?.name, museum?.location)">
+            <i class="fas fa-paper-plane"></i> Itinéraire
+            </button>
+        </div>
+      </div>
+    </div>
+    <section class="comments-section mt-5">
+      <h2 class="comments-title mb-3">Commentaires</h2>
+      <div class="comments-links mt-4">
+        <app-museum-comments></app-museum-comments>
+      </div>
+    </section>
+  </section>
+</div>

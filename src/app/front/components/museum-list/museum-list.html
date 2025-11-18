@@ -1,1 +1,70 @@
-<p>museum-list works!</p>
+<div class="museums-page">
+  <div class="page-header">
+    <h2>Musées en Tunisie</h2>
+    <p>Découvrez les institutions culturelles à travers le pays.</p>
+  </div>
+
+  <div class="museum-container">
+    <div class="filters-section">
+      <div class="category-filters">
+        <button class="filter-btn" [class.active]="selectedCategory=='Tous'" (click)="filterByCategory('Tous')">Tous</button>
+        <button class="filter-btn" [class.active]="selectedCategory=='Archaeological'" (click)="filterByCategory('Archaeological')">Archéologie</button>
+        <button class="filter-btn" [class.active]="selectedCategory =='Modern Art'" (click)="filterByCategory('Modern Art')">Beaux-arts</button>
+        <button class="filter-btn" [class.active]="selectedCategory=='Islamic Art'" (click)="filterByCategory('Islamic Art')">Histoire</button>
+        <button class="filter-btn" [class.active]="selectedCategory=='Ethnographic'" (click)="filterByCategory('Ethnographic')">Ethnographie</button>
+      </div>
+
+      <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Rechercher un musée..." [(ngModel)]="searchTerm" (ngModelChange)="filterByName()">
+      </div>
+    </div>
+    <div class="museum-gallery">
+      @for (museum of museums; track museum.id) {
+      <div class="museum-card">
+        <div class="museum-image">
+          <img [src]="museum.photo" [alt]="museum.name" />
+        </div>
+        <div class="museum-content">
+          <h3 class="museum-name">
+            {{ museum.name }}
+            <span class="status" [class]="museum.is_open == 1 ? 'open' : 'closed'">
+              {{ museum.is_open == 1 ? 'Ouvert' : 'Fermé' }}
+            </span>
+          </h3>
+          <p class="museum-category">
+            @if (museum.category == 'Archaeological') {
+            <i class="bi bi-archive"></i>
+            }
+            @if (museum.category == 'Ethnographic') {
+            <i class="bi bi-people"></i>
+            }
+            @if (museum.category == 'Islamic Art') {
+            <i class="bi bi-stars"></i>
+            }
+            @if (museum.category == 'Traditional Arts') {
+            <i class="bi bi-palette"></i>
+            }
+            @if (museum.category == 'Modern Art') {
+            <i class="bi bi-brush"></i>
+            }
+            {{ museum.category }} • {{ museum.location }}
+          </p>
+          <div class="museum-meta">
+            <span class="location"><i class="bi bi-geo-alt"></i> {{ museum.location }}</span>
+            <button class="details-btn" type="button" [routerLink]="['/museum', museum.id]">
+              <i class="bi bi-eye"></i> Voir Détails
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+      @empty {
+      <div class="empty-state">
+        <i class="bi bi-building-x"></i>
+        <p>Aucun musée trouvé</p>
+      </div>
+      }
+    </div>
+  </div>
+</div>

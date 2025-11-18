@@ -52,18 +52,21 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular/build:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "mini_prj_angular:build:production"
-            },
-            "development": {
-              "buildTarget": "mini_prj_angular:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
+                "serve": {
+                "builder": "@angular/build:dev-server",
+                "options": {
+                  "proxyConfig": "proxy.conf.json"
+                },
+                "configurations": {
+                  "production": {
+                    "buildTarget": "mini_prj_angular:build:production"
+                  },
+                  "development": {
+                    "buildTarget": "mini_prj_angular:build:development"
+                  }
+                },
+                "defaultConfiguration": "development"
+              },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },

@@ -1,0 +1,166 @@
+.comments-section {
+    background: #fbfcfe;
+    border: 1px solid #e7edf6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    max-width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+    color: #0b1220;
+  }
+
+  .comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+
+  .comments-count {
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: #8ea0b3;
+  }
+
+  .comments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .comment-item {
+    display: flex;
+    align-items: flex-start;
+    background: #f6f9fb;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e7edf6;
+  }
+
+  .comment-avatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 1rem;
+  }
+
+  .comment-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .comment-content {
+    flex-grow: 1;
+  }
+
+  .comment-author {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .comment-content p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #274155;
+  }
+
+  .like-btn {
+    background: #3579b0;
+    border: none;
+    color: #ffffff;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .like-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: #ffffff;
+  }
+
+  .like-btn:hover,
+  .like-btn:focus {
+    background: #274155;
+    outline: none;
+  }
+
+  .add-comment-form {
+    border-top: 1px solid #e7edf6;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .add-comment-form textarea {
+    width: 100%;
+    border: 1px solid #e7edf6;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #0b1220;
+    resize: vertical;
+    background: #ffffff;
+    transition: border-color 0.3s ease;
+  }
+
+  .add-comment-form textarea:focus {
+    border-color: #3579b0;
+    outline: none;
+  }
+
+  .submit-comment-btn {
+    align-self: flex-end;
+    background: #3579b0;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .submit-comment-btn .icon-send {
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff;
+  }
+
+  .submit-comment-btn:hover,
+  .submit-comment-btn:focus {
+    background: #274155;
+    outline: none;
+  }
+
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }

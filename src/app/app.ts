@@ -4,7 +4,7 @@ import { Menu } from './front/components/menu/menu';
 
 @Component({
   selector: 'app-root',
-  imports: [Menu],
+  imports: [Menu,RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
