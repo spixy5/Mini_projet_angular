@@ -26,4 +26,7 @@ export class ServiceUser {
   adminLogin(username: string, password: string): Observable<any> {
   return this.http.post<any>(`${this.URL}/admin_login.php`,{username, password });
 }
+  updateActivity(id: number): Observable<any> {
+    return this.http.post<any>(`${this.URL}/update_activity_user.php`,{id});
+  }
 }

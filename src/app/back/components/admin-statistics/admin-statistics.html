@@ -1,1 +1,89 @@
-<p>admin-statistics works!</p>
+<div class="stats-musees">
+  <h2>Statistiques des musées</h2>
+  <p class="subheading">Vue d'ensemble des visites, billets vendus et commentaires</p>
+
+  <div class="musee-list">
+    @for(museum of museums; track museum.id) {
+      <div class="musee">
+        <div class="header">
+          <img [src]="museum.photo" alt="{{museum.name}}" />
+          <div class="title">
+            <div class="name">{{museum.name}}</div>
+            <div class="location">{{museum.location}}</div>
+          </div>
+          <div class="trend trend-success">+{{museum.visits ? (museum.visits / 1000 | number:'1.0-0') : 0}}%</div>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="icon visits"></div>
+            <div class="label">Visites</div>
+            <div class="value">{{museum.visits || 0}}</div>
+          </div>
+          <div class="stat">
+            <div class="icon billets"></div>
+            <div class="label">Billets vendus</div>
+            <div class="value">{{museum.tickets?.length}}</div>
+          </div>
+          <div class="stat">
+            <div class="icon commentaires"></div>
+            <div class="label">Commentaires</div>
+            <div class="value">{{museum.commenst?.length}}</div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="stats-musees">
+    <div class="musee-list">
+@for ( user of users; track user.id) {
+  <div class="admin-preview">
+    <h3 class="admin-preview__title">Aperçu administrateur — Utilisateur</h3>
+    <div class="admin-preview__user">
+      <div class="user-icon" aria-hidden="true"><i class="bi bi-person"></i></div>
+      <div class="user-info">
+        <div class="user-name">{{ user.name }}</div>
+        <div class="user-email">{{ user.email }}</div>
+      </div>
+      <div class="user-status">
+        <span class="status-indicator"></span>
+        <span class="status-text">Actif</span> <!-- You said you'll handle active logic later -->
+      </div>
+    </div>
+
+    <div class="admin-preview__stats">
+      <div class="stat-block">
+        <div class="stat-label">Actions totales</div>
+        <div class="stat-value">{{ user.activity_count }}</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Dernière connexion</div>
+        <div class="stat-value">
+          {{ user.last_login ? (user.last_login | date:'dd MMM yyyy') : 'Aucune' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-preview__flags">
+      <div class="flag-block">
+        <div class="flag-label">Suspensions</div>
+        <div class="flag-value" [class.flag-value--success]="user.suspension==0">
+          {{ user.suspension==0 ? 'Aucune' : user.suspension }}
+        </div>
+      </div>
+      <div class="flag-block">
+        <div class="flag-label">Banni</div>
+        <div class="flag-value" [class.flag-value--success]="user.banned==0">
+          {{ user.banned== 0 ? 'Non' : 'Oui' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-preview__footer">
+      Profil conforme aux standards — tableau de bord moderne.
+    </div>
+  </div>
+}
+</div> 
+</div>

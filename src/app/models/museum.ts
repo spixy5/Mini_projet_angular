@@ -1,4 +1,5 @@
 import { Comment } from "./comment";
+import { Ticket } from "./ticket";
 
 export interface Museum {
   id?: number;
@@ -14,4 +15,5 @@ export interface Museum {
   opening_hour: Date; 
   closing_hour: Date; 
   commenst?: Comment[];
+  tickets? :Ticket[];
 }
