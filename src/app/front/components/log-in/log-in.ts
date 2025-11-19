@@ -21,12 +21,17 @@ private fb: FormBuilder=inject(FormBuilder);
  }
 
 login() {
+ 
+   if (this.loginForm.invalid) {
+    alert("Informations invalides. Veuillez vérifier vos identifiants.");
+    return;
+  }
   const email = this.loginForm.value.email;
   const password = this.loginForm.value.password;
   this.userService.login(email, password).subscribe(
     data => {
     if (data.success) {
-          localStorage.setItem('userID', data.user.id);
+          localStorage.setItem('userId', data.user.id);
           localStorage.setItem('userName', data.user.name);
           localStorage.setItem('userEmail', data.user.email);
           this.router.navigate(['/home']);

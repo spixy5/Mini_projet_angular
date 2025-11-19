@@ -7,7 +7,7 @@
       <div class="login-form-header">Connexion</div>
       <p class="login-form-subtext">Entrez vos identifiants pour accéder à la plateforme Musées de Tunisie.</p>
 
-      <form [formGroup]="loginForm">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
         <label for="email">Email</label>
         <input type="email" id="email" formControlName="email" placeholder="vous@example.com" autocomplete="username" />
         @if(loginForm.get('email')?.invalid && loginForm.get('email')?.touched)
@@ -23,7 +23,7 @@
         {<div class="error-message">
           <i class="bi bi-exclamation-triangle-fill"></i>  Mot de passe invalide
             </div>}
-        <button type="button" class="btn-primary" (click)="login()">Se connecter</button>
+        <button type="submit" class="btn-primary" >Se connecter</button>
       </form>
 
       <div class="separator">ou</div>
@@ -45,7 +45,7 @@
   </div>
 
   <div class="info-card">
-    <img src="photos/myimage.png" alt="Musée Tunisie" />
+    <img src="photos/login.png" alt="Musée Tunisie" />
     <div class="info-overlay">
       <div class="info-top-label">Plateforme nationale des musées</div>
       <h3>Découvrez, suivez et valorisez le patrimoine tunisien</h3>

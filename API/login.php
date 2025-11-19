@@ -2,13 +2,13 @@
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include 'db_connection.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $email = isset($data['email']) ? $data['email'] : '';
 $password = isset($data['password']) ? $data['password'] : '';
-$sql = "SELECT id, name, email, password FROM users WHERE email = '$email'";
+$sql = "SELECT id, name, email, password_hash FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
 if (!$result || mysqli_num_rows($result) == 0) {
     echo json_encode([

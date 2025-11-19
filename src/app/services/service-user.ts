@@ -11,4 +11,7 @@ export class ServiceUser {
   login(email: string, password: string): Observable<any> {
   return this.http.post<any>(`${this.URL}/login.php`, { email, password });
 }
+  signup(name: string, email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.URL}/signup.php`,  { name, email, password });
+  }
 }

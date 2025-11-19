@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'login', component: LogIn, title: 'Connexion' },
   { path: 'signup', component: SignUp, title: 'Créer un compte' },
   { path: 'aboutus', component: AboutUs, title: 'A props' },
-  { path: 'forgot-password', component: ForgotPassword, title: 'Mot de passe oublié' },
+  { path: 'forgot-password/:email', component: ForgotPassword, title: 'Mot de passe oublié' },
   { path: 'museums', component: MuseumList, title: 'Liste des musées' },
   { path: 'museum/:id', component: MuseumSelected, title: 'Musée sélectionné' },
   { path: 'museum/:id/comments', component: MuseumComments, title: 'Commentaires du musée' },
