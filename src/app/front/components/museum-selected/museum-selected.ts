@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceMuseum } from '../../../services/service-museum';
 import { DatePipe } from '@angular/common';
 import { MuseumComments } from '../museum-comments/museum-comments';
+import { ServiceUser } from '../../../services/service-user';
 
 @Component({
   selector: 'app-museum-selected',
@@ -14,7 +15,8 @@ import { MuseumComments } from '../museum-comments/museum-comments';
 export class MuseumSelected {
 private route = inject(ActivatedRoute);
  private router: Router=inject(Router);
-  private museumService = inject(ServiceMuseum);
+  private museumService:ServiceMuseum = inject(ServiceMuseum);
+  private userService:ServiceUser=inject(ServiceUser)
   museumId?: number;
   museum!: Museum;
   ngOnInit(): void {
@@ -23,6 +25,12 @@ private route = inject(ActivatedRoute);
       data => {
         console.log(data)
         this.museum = data;
+        const userId = Number(localStorage.getItem('userId'));
+        if(userId){
+        this.userService.updateActivity(userId).subscribe(
+        data=>console.log(data)
+      )
+      }
       
     });
   }

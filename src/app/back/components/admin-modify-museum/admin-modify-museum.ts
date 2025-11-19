@@ -4,6 +4,7 @@ import { ServiceMuseum } from '../../../services/service-museum';
 import { Museum } from '../../../models/museum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetDatePipe } from '../../../pipe/get-date-pipe';
+import { ServiceUser } from '../../../services/service-user';
 
 @Component({
   selector: 'app-admin-modify-museum',
@@ -17,6 +18,7 @@ export class AdminModifyMuseum {
   private museumService :ServiceMuseum=inject(ServiceMuseum)
   private route = inject(ActivatedRoute);
  private router: Router=inject(Router);
+ private userService:ServiceUser=inject(ServiceUser);
   museumId?: number;
     museum!: Museum;
   ngOnInit(): void {
@@ -67,7 +69,15 @@ export class AdminModifyMuseum {
         data=>{
           if(data.success){
             console.log(data);
-          
+            this.museum=data.museum;
+               const userId = Number(localStorage.getItem('userId'));
+              this.userService.updateActivity(userId).subscribe(
+                data=>console.log(data)
+              );
+               alert("Musée mis à jour avec succès");
+              this.router.navigate(['/admin/museums']);
+
+
           }
           else{
             alert('erro :'+data.message)

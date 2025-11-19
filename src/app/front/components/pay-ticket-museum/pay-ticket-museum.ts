@@ -6,6 +6,7 @@ import { ServiceMuseum } from '../../../services/service-museum';
 import { DatePipe } from '@angular/common';
 import { StartHourPipe } from '../../../pipe/start-hour-pipe';
 import { PromoCode } from '../../../models/promo-code';
+import { ServiceUser } from '../../../services/service-user';
 
 @Component({
   selector: 'app-pay-ticket-museum',
@@ -18,6 +19,7 @@ private fb: FormBuilder=inject(FormBuilder);
 private route : ActivatedRoute=inject(ActivatedRoute)
 private museumService:ServiceMuseum=inject(ServiceMuseum);
 private cd: ChangeDetectorRef=inject(ChangeDetectorRef);
+private userService:ServiceUser=inject(ServiceUser);
  paymentForm!: FormGroup;
  museum!:Museum;
  totalAmount: number=0;
@@ -153,6 +155,11 @@ this.museumService.sendTicketPayment(ticketData).subscribe(
     if (data.success) {
       alert('Paiement réussi ! Un email vous a été envoyé.');
       console.log(data);
+        const userId = Number(localStorage.getItem('userId'));
+      this.userService.updateActivity(userId).subscribe(
+        data=>console.log(data)
+      )
+
       this.paymentForm.reset();
       this.paymentForm.get('visitDetails')?.patchValue({
         ticketCount: 1,

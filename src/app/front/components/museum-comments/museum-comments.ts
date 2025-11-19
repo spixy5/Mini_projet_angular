@@ -2,6 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Comment } from '../../../models/comment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceMuseum } from '../../../services/service-museum';
+import { ServiceUser } from '../../../services/service-user';
 @Component({
   selector: 'app-museum-comments',
   imports: [],
@@ -10,10 +11,12 @@ import { ServiceMuseum } from '../../../services/service-museum';
 })
 export class MuseumComments implements OnInit{
   private router:Router=inject(Router);
-   @Input() museumId!: number;
-  comments: Comment[]=[]; 
   private route: ActivatedRoute=inject(ActivatedRoute);
-    private museumService: ServiceMuseum=inject(ServiceMuseum);
+  private museumService: ServiceMuseum=inject(ServiceMuseum);
+  private userService: ServiceUser=inject(ServiceUser);
+     @Input() museumId!: number;
+  comments: Comment[]=[]; 
+
   ngOnInit(): void {
     if(this.museumId)
   { this.museumService.getAllComments(this.museumId).subscribe(
@@ -47,6 +50,10 @@ onSubmitComment(comment :string) {
     data => {
       console.log(data);
       this.comments.push(data);
+      const userId = Number(localStorage.getItem('userId'));
+      this.userService.updateActivity(userId).subscribe(
+        data=>console.log(data)
+      )
     });
 }
 
