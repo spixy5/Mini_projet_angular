@@ -1,0 +1,46 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ServiceUser } from '../../../services/service-user';
+import { Router } from '@angular/router';
+@Component({
+  selector: 'app-admin',
+  imports: [ReactiveFormsModule],
+  templateUrl: './admin.html',
+  styleUrl: './admin.css',
+})
+export class Admin implements OnInit{
+  private fb: FormBuilder=inject(FormBuilder) 
+  private serviceUser: ServiceUser=inject(ServiceUser)
+  private router:Router=inject(Router);
+  adminForm!: FormGroup;
+ngOnInit(): void {
+      this.adminForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+}
+  
+
+onSubmit() {
+  if (this.adminForm.invalid) {
+    alert('Veuillez remplir le formulaire');
+  } else {
+    const username=this.adminForm.get('username')?.value;
+    const password=this.adminForm.get('password')?.value;
+   this.serviceUser.adminLogin(username, password).subscribe(
+    data => {
+    if (data.success) {
+      console.log(data)
+          localStorage.setItem('userId', data.user.id);
+          localStorage.setItem('userName', data.user.name);
+          localStorage.setItem('userEmail', data.user.email);
+          localStorage.setItem('role', data.user.role);
+          this.router.navigate(['/admin/museums']);
+        } else {
+          alert('Erreur:'+data.message);
+        }
+});
+  }
+}
+
+}

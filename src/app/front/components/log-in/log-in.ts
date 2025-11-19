@@ -44,9 +44,10 @@ login() {
           localStorage.setItem('userId', data.user.id);
           localStorage.setItem('userName', data.user.name);
           localStorage.setItem('userEmail', data.user.email);
+          localStorage.setItem('role', data.user.role);
           this.router.navigate(['/home']);
         } else {
-          console.log('Erreur:', data.message);
+          alert('Erreur:'+data.message);
         }
 });
 }

@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'app-admin-dashboard',
   imports: [RouterLink,RouterLinkActive],
-  templateUrl: './menu.html',
-  styleUrl: './menu.css',
+  templateUrl: './admin-dashboard.html',
+  styleUrl: './admin-dashboard.css',
 })
-export class Menu {
+export class AdminDashboard {
 userId: string | null=null;
 userRole: string | null=null;
 onRole(): boolean {
@@ -21,5 +21,4 @@ onRole(): boolean {
 OnlogOut(){
   localStorage.clear()
 }
-
 }

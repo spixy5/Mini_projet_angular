@@ -8,8 +8,10 @@ include 'db_connection.php';
 $data = json_decode(file_get_contents('php://input'), true);
 $email = isset($data['email']) ? $data['email'] : '';
 $password = isset($data['password']) ? $data['password'] : '';
-$sql = "SELECT id, name, email, password_hash FROM users WHERE email = '$email'";
+
+$sql = "SELECT id, name, email, password_hash, role FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
+
 if (!$result || mysqli_num_rows($result) == 0) {
     echo json_encode([
         "success" => false,
@@ -17,14 +19,20 @@ if (!$result || mysqli_num_rows($result) == 0) {
     ]);
     exit();
 }
+
 $user = mysqli_fetch_assoc($result);
+
 if (password_verify($password, $user['password_hash'])) {
+    $update = "UPDATE users SET last_login = NOW() WHERE id = {$user['id']}";
+    mysqli_query($conn, $update);
+
     echo json_encode([
         "success" => true,
         "user" => [
             "id" => $user['id'],
             "name" => $user['name'],
-            "email" => $user['email']
+            "email" => $user['email'],
+            "role" => $user['role'],
         ]
     ]);
 } else {
@@ -33,6 +41,6 @@ if (password_verify($password, $user['password_hash'])) {
         "message" => "Mot de passe incorrect"
     ]);
 }
+
 mysqli_close($conn);
 ?>
-

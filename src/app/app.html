@@ -1,2 +1,7 @@
-<app-menu></app-menu>
+@if(onRole() && userRole=='admin'){
+ <app-admin-dashboard></app-admin-dashboard>
+}
+@else{
+    <app-menu></app-menu>
+}
 <router-outlet/>

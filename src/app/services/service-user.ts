@@ -21,6 +21,9 @@ export class ServiceUser {
     return this.http.post<any>(`${this.URL}/send_confirmation_code.php`,{email});
   }
   updatePassword(email: string, newPassword: string): Observable<any> {
-    return this.http.post<any>(`${this.URL}/update_password.php`,{ email, newPassword });
+    return this.http.post<any>(`${this.URL}/update_password.php`,{email, newPassword });
   }
+  adminLogin(username: string, password: string): Observable<any> {
+  return this.http.post<any>(`${this.URL}/admin_login.php`,{username, password });
+}
 }

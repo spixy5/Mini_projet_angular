@@ -1,0 +1,81 @@
+<div class="component-container">
+  <div class="header-section">
+    <h2>Ajouter un musée</h2>
+    <p>Créez une nouvelle fiche musée. Tous les champs ci-dessous sont requis.</p>
+  </div>
+  <button class="back-button" type="button" aria-label="Retour">
+    <svg class="back-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Retour
+  </button>
+</div>
+
+<form [formGroup]="museumForm" class="museum-form card" (ngSubmit)="OnSubmit()">
+  <h3>Fiche du musée</h3>
+
+  <div class="form-group">
+    <label>Chemin de l'image du musée</label>
+    <input type="text" formControlName="imagePath" />
+    <p class="hint">L'admin doit placer manuellement la photo dans le dossier 'photos'.</p>
+  </div>
+
+  <div class="form-group">
+    <label>Nom du musée</label>
+    <input type="text" formControlName="museumName" />
+  </div>
+
+  <div class="form-group">
+    <label>Adresse</label>
+    <input type="text" formControlName="address" />
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label>Ouverture</label>
+      <select formControlName="opening">
+        <option value="1">Ouvert</option>
+        <option value="0">Fermé</option>
+      </select>
+    </div>
+     <div class="form-group">
+      <label>Catégorie</label>
+      <select formControlName="category">
+        <option value="Archaeological">Archéologique</option>
+        <option value="Ethnographic">Ethnographique</option>
+        <option value="Islamic Art">Art islamique</option>
+        <option value="Traditional Arts">Arts traditionnels</option>
+        <option value="Modern Art">Art moderne</option>
+      </select>
+    </div>  
+  </div>
+      <div class="form-group">
+      <label>Date de création</label>
+      <input type="date" formControlName="creationDate" />
+    </div>
+  <div class="form-group">
+      <label>Prix d'entrée</label>
+      <input type="text" formControlName="price" />
+    </div>
+    <div class="row">
+    <div class="form-group">
+      <label> Heure d'ouverture</label>
+      <input type="time" name="openingHour" formControlName="openingHour">
+    </div>
+     <div class="form-group">
+      <label>Heure de fermeture</label>
+         <input type="time" name="closingHour" formControlName="closingHour">
+    </div>  
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea rows="4" formControlName="description"></textarea>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn cancel" >Annuler</button>
+    <button type="submit" class="btn add-museum" >
+      <span class="plus-icon">+</span> Ajouter le musée
+    </button>
+  </div>
+</form>

@@ -17,14 +17,14 @@ export class ServiceMuseum {
   getMuseumById(id: number): Observable<Museum> {
     return this.http.get<Museum>(`${this.URL}/get_museum_by_id.php?id=${id}`);
   }
-  createMuseum(museum: Museum): Observable<Museum> {
-    return this.http.post<Museum>(`${this.URL}/add_museums.php`, museum);
+  createMuseum(museum: Museum): Observable<any> {
+    return this.http.post<Museum>(`${this.URL}/add_museum.php`, museum);
   }
-  updateMuseum(museum: Museum): Observable<Museum> {
+  updateMuseum(museum: Museum): Observable<any> {
     return this.http.put<Museum>(`${this.URL}/update_museums.php`, museum);
   }
-  deleteMuseum(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.URL}/delete_museums.php?id=${id}`);
+    deleteMuseum(id: number): Observable<any> {
+    return this.http.get<Museum>(`${this.URL}/delete_museum.php?id=${id}`);
   }
     getAllComments(museumId: number): Observable<any> {
     return this.http.get<any>(`${this.URL}/get_museum_comments.php?museumId=${museumId}`);

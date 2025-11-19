@@ -5,16 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-museum-list',
+  selector: 'app-admin-museums',
   imports: [FormsModule,RouterLink],
-  templateUrl: './museum-list.html',
-  styleUrl: './museum-list.css',
+  templateUrl: './admin-museums.html',
+  styleUrl: './admin-museums.css',
 })
-export class MuseumList implements OnInit{
-  private museumService :ServiceMuseum = inject(ServiceMuseum);
+export class AdminMuseums implements OnInit{
+private museumService:ServiceMuseum = inject(ServiceMuseum);
   constMuseum:Museum[]=[];
   museums: Museum[]=[];
-  selectedCategory: string = 'Tous';
   searchTerm: string = '';
   ngOnInit(): void {
     this.museumService.getAllMuseums().subscribe(
@@ -25,25 +24,28 @@ export class MuseumList implements OnInit{
        }
       );
   }
-    filterByCategory(category: string) {
-    this.selectedCategory = category;
-    this.searchTerm='';
-    if(this.selectedCategory!='Tous'){
-   this.museums=this.constMuseum.filter(museum => museum.category==this.selectedCategory 
-  );
- }
- else{
-  this.museums=this.constMuseum
- }
-  }
+
   filterByName(){
   if (this.searchTerm) {
-    this.selectedCategory='Tous';
     this.museums = this.constMuseum.filter(museum =>museum.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   } else {
     this.museums = this.constMuseum;
   }
 }
+deleteMuseum(museumId :number){
+     this.museumService.deleteMuseum(museumId).subscribe(
+       data => {
+         if(data.success){
+          console.log(data)
+          this.museums=this.constMuseum.filter(museum => museum.id!=museumId)
+          this.constMuseum=this.museums;
+         }
+         else{
+          console.log('error',data.message)
+         }
+       }
+      );
 
+}
 }

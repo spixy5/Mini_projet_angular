@@ -3,6 +3,7 @@ export interface User {
   name: string;
   email: string;
   password_hash: string;
+  role: 'admin' | 'user' ;
   suspension: number;
   banned: number;
   last_login?: Date;
