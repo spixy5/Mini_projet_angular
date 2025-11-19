@@ -1,0 +1,227 @@
+.museum-form {
+  background: #f6f9fb;
+  color: #0b1220;
+  border: 1px solid #e7edf6;
+  border-radius: 8px;
+  padding: 24px 32px 32px;
+  max-width: 90%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  user-select: none;
+  margin-left: 100px;
+  margin-top: 20px;
+}
+
+.museum-form h3 {
+  margin: 0 0 16px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #0b1220;
+}
+
+.museum-form label {
+    margin-top: 5px;
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #274155;
+}
+
+.museum-form input[type="text"],
+.museum-form input[type="time"],
+.museum-form input[type="date"],
+.museum-form textarea {
+  width: 100%;
+  height: 50px;
+  background: #ffffff;
+  border: 1px solid #e7edf6;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #0b1220;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+  font-weight: 400;
+}
+
+.museum-form input[type="text"]:focus,
+.museum-form textarea:focus {
+  outline: none;
+  border-color: #3579b0;
+  box-shadow: 0 0 4px rgba(53, 121, 176, 0.4);
+}
+
+.museum-form textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.museum-form .hint {
+  margin: 10px 0 20px 0;
+  font-size: 12px;
+  color: #8ea0b3;
+  user-select: text;
+}
+
+
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn {
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn.cancel {
+  background: #f2f5f8;
+  color: #8ea0b3;
+  border: 1px solid #e7edf6;
+}
+
+.btn.cancel:hover,
+.btn.cancel:focus {
+  background: #e7edf6;
+  color: #274155;
+  outline: none;
+}
+
+.btn.add-museum {
+  background: #3579b0;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(53, 121, 176, 0.5);
+}
+
+.btn.add-museum:hover,
+.btn.add-museum:focus {
+  background: #2d658f;
+  box-shadow: 0 4px 10px rgba(45, 101, 143, 0.7);
+  outline: none;
+}
+
+.plus-icon {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+  user-select: none;
+}
+.component-container {
+    margin: 20px;
+    margin-left: 100px;
+    width: 90%;
+    background: #f6f9fb;
+    border: 1px solid #e7edf6;
+    border-radius: 15px;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-section h2 {
+    margin: 0 0 4px 0;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #274155;
+  }
+
+  .header-section p {
+    margin: 0;
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: #8ea0b3;
+  }
+
+  .back-button {
+    background: #ffffff;
+    border: 1px solid #e7edf6;
+    border-radius: 9999px;
+    padding: 6px 12px 6px 8px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: #274155;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .back-button:hover,
+  .back-button:focus {
+    background: #e7edf6;
+    border-color: #3579b0;
+    color: #3579b0;
+    outline: none;
+  }
+
+  .back-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    stroke: #274155;
+    transition: stroke 0.2s;
+  }
+
+  .back-button:hover .back-icon,
+  .back-button:focus .back-icon {
+    stroke: #3579b0;
+  }
+  .museum-form select {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e7edf6;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #0b1220;
+  box-sizing: border-box;
+  font-weight: 400;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.museum-form select:focus {
+  outline: none;
+  border-color: #3579b0;
+  box-shadow: 0 0 4px rgba(53, 121, 176, 0.4);
+}
+
+.museum-form select option {
+  color: #0b1220;
+  font-weight: 400;
+}
+.museum-form .row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.museum-form .row .form-group {
+  flex: 1;
+}
+.error-message {
+  background-color: #f91f1fb8;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  margin-top: 6px;
+}

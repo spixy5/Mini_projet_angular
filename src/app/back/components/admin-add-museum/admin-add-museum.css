@@ -217,3 +217,11 @@
 .museum-form .row .form-group {
   flex: 1;
 }
+.error-message {
+  background-color: #f91f1fb8;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  margin-top: 6px;
+}

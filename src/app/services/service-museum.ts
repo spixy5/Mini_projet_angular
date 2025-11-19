@@ -21,7 +21,7 @@ export class ServiceMuseum {
     return this.http.post<Museum>(`${this.URL}/add_museum.php`, museum);
   }
   updateMuseum(museum: Museum): Observable<any> {
-    return this.http.put<Museum>(`${this.URL}/update_museums.php`, museum);
+    return this.http.put<Museum>(`${this.URL}/update_museum.php`, museum);
   }
     deleteMuseum(id: number): Observable<any> {
     return this.http.get<Museum>(`${this.URL}/delete_museum.php?id=${id}`);
@@ -41,5 +41,6 @@ sendTicketPayment(ticket: any): Observable<any> {
 markPromoCodeAsUsed(code: string): Observable<any> {
   return this.http.post<any>(`${this.URL}/use_promo_code.php`,{code });
 }
+
 
 }

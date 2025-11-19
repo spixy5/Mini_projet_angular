@@ -15,15 +15,15 @@ export class AdminAddMuseum implements OnInit{
   private museumService :ServiceMuseum=inject(ServiceMuseum)
   ngOnInit(): void {
     this.museumForm = this.fb.group({
-      imagePath: ['photos/',Validators.required],
-      museumName: ['', [Validators.required , Validators.minLength(2)]],
-      address: ['', [Validators.required , Validators.minLength(2)]],
-      opening: [1, Validators.required],
-      price: [0, [Validators.required , Validators.min(0.1)]],
-      openingHour:['00:00',Validators.required],
-      closingHour:['00:00',Validators.required],
+      photo: ['photos/',Validators.required],
+      name: ['', [Validators.required , Validators.minLength(2)]],
+      location: ['', [Validators.required , Validators.minLength(2)]],
+      is_open: [1, Validators.required],
+      entry_price: [0, [Validators.required , Validators.min(0.1)]],
+      opening_hour:['00:00',Validators.required],
+      closing_hour:['00:00',Validators.required],
       category: ['Archaeological', Validators.required],
-      creationDate: ['', Validators.required],
+      created_at: ['', Validators.required],
       description: ['',Validators.required]
     });
   }
@@ -33,20 +33,8 @@ export class AdminAddMuseum implements OnInit{
         this.museumForm.markAllAsTouched();
     }
     else{
-      const museumData :Museum = {
-          id: this.museumForm.get(' museum_id')?.value,
-          name:  this.museumForm.get('museumName')?.value,
-          location: this.museumForm.get('address')?.value,
-          photo: this.museumForm.get('imagePath')?.value,
-          is_open: this.museumForm.get('opening')?.value,
-          entry_price: this.museumForm.get('price')?.value,
-          opening_hour: this.museumForm.get('openingHour')?.value,
-          closing_hour: this.museumForm.get('closingHour')?.value,
-          category: this.museumForm.get('category')?.value,
-          created_at: this.museumForm.get('creationDate')?.value,
-          description: this.museumForm.get('description')?.value,
-};
-      this.museumService.createMuseum(museumData).subscribe(
+
+      this.museumService.createMuseum(this.museumForm.value).subscribe(
         data =>{
           if(data.success){
             console.log(data)

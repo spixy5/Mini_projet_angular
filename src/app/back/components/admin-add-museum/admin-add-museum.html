@@ -1,44 +1,55 @@
-<div class="component-container">
-  <div class="header-section">
-    <h2>Ajouter un musée</h2>
-    <p>Créez une nouvelle fiche musée. Tous les champs ci-dessous sont requis.</p>
-  </div>
-  <button class="back-button" type="button" aria-label="Retour">
-    <svg class="back-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Retour
-  </button>
-</div>
-
 <form [formGroup]="museumForm" class="museum-form card" (ngSubmit)="OnSubmit()">
   <h3>Fiche du musée</h3>
 
+  <!-- PHOTO -->
   <div class="form-group">
     <label>Chemin de l'image du musée</label>
-    <input type="text" formControlName="imagePath" />
+    <input type="text" formControlName="photo" />
+    @if(museumForm.get('photo')?.touched && museumForm.get('photo')?.errors?.['required']){
+      <div class="error-message">Le chemin de la photo est obligatoire.</div>
+    }
     <p class="hint">L'admin doit placer manuellement la photo dans le dossier 'photos'.</p>
   </div>
 
+  <!-- NAME -->
   <div class="form-group">
     <label>Nom du musée</label>
-    <input type="text" formControlName="museumName" />
+    <input type="text" formControlName="name" />
+    @if(museumForm.get('name')?.touched && museumForm.get('name')?.errors?.['required']){
+      <div class="error-message">Le nom est obligatoire.</div>
+    }
+    @else if(museumForm.get('name')?.touched && museumForm.get('name')?.errors?.['minlength']){
+      <div class="error-message">Le nom doit contenir au moins 2 caractères.</div>
+    }
   </div>
 
+  <!-- LOCATION -->
   <div class="form-group">
     <label>Adresse</label>
-    <input type="text" formControlName="address" />
+    <input type="text" formControlName="location" />
+    @if(museumForm.get('location')?.touched && museumForm.get('location')?.errors?.['required']){
+      <div class="error-message">L’adresse est obligatoire.</div>
+    }
+    @else if(museumForm.get('location')?.touched && museumForm.get('location')?.errors?.['minlength']){
+      <div class="error-message">L’adresse doit contenir au moins 2 caractères.</div>
+    }
   </div>
 
   <div class="row">
+    <!-- is_open -->
     <div class="form-group">
       <label>Ouverture</label>
-      <select formControlName="opening">
+      <select formControlName="is_open">
         <option value="1">Ouvert</option>
         <option value="0">Fermé</option>
       </select>
+      @if(museumForm.get('is_open')?.touched && museumForm.get('is_open')?.invalid){
+        <div class="error-message">Ce champ est obligatoire.</div>
+      }
     </div>
-     <div class="form-group">
+
+    <!-- category -->
+    <div class="form-group">
       <label>Catégorie</label>
       <select formControlName="category">
         <option value="Archaeological">Archéologique</option>
@@ -47,34 +58,65 @@
         <option value="Traditional Arts">Arts traditionnels</option>
         <option value="Modern Art">Art moderne</option>
       </select>
-    </div>  
-  </div>
-      <div class="form-group">
-      <label>Date de création</label>
-      <input type="date" formControlName="creationDate" />
+      @if(museumForm.get('category')?.touched && museumForm.get('category')?.invalid){
+        <div class="error-message">La catégorie est obligatoire.</div>
+      }
     </div>
+  </div>
+
+  <!-- CREATED DATE -->
   <div class="form-group">
-      <label>Prix d'entrée</label>
-      <input type="text" formControlName="price" />
-    </div>
-    <div class="row">
-    <div class="form-group">
-      <label> Heure d'ouverture</label>
-      <input type="time" name="openingHour" formControlName="openingHour">
-    </div>
-     <div class="form-group">
-      <label>Heure de fermeture</label>
-         <input type="time" name="closingHour" formControlName="closingHour">
-    </div>  
+    <label>Date de création</label>
+    <input type="date" formControlName="created_at" />
+    @if(museumForm.get('created_at')?.touched && museumForm.get('created_at')?.invalid){
+      <div class="error-message">La date est obligatoire.</div>
+    }
   </div>
+
+  <!-- ENTRY PRICE -->
+  <div class="form-group">
+    <label>Prix d'entrée</label>
+    <input type="text" formControlName="entry_price" />
+    @if(museumForm.get('entry_price')?.touched && museumForm.get('entry_price')?.errors?.['required']){
+      <div class="error-message">Le prix est obligatoire.</div>
+    }
+    @else if(museumForm.get('entry_price')?.touched && museumForm.get('entry_price')?.errors?.['min']){
+      <div class="error-message">Le prix doit être supérieur à 0.</div>
+    }
+  </div>
+
+  <div class="row">
+    <!-- OPENING HOUR -->
+    <div class="form-group">
+      <label>Heure d'ouverture</label>
+      <input type="time" formControlName="opening_hour">
+      @if(museumForm.get('opening_hour')?.touched && museumForm.get('opening_hour')?.invalid){
+        <div class="error-message">L'heure d'ouverture est obligatoire.</div>
+      }
+    </div>
+
+    <!-- CLOSING HOUR -->
+    <div class="form-group">
+      <label>Heure de fermeture</label>
+      <input type="time" formControlName="closing_hour">
+      @if(museumForm.get('closing_hour')?.touched && museumForm.get('closing_hour')?.invalid){
+        <div class="error-message">L'heure de fermeture est obligatoire.</div>
+      }
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
   <div class="form-group">
     <label>Description</label>
     <textarea rows="4" formControlName="description"></textarea>
+    @if(museumForm.get('description')?.touched && museumForm.get('description')?.invalid){
+      <div class="error-message">La description est obligatoire.</div>
+    }
   </div>
 
   <div class="actions">
-    <button type="button" class="btn cancel" >Annuler</button>
-    <button type="submit" class="btn add-museum" >
+    <button type="button" class="btn cancel">Annuler</button>
+    <button type="submit" class="btn add-museum">
       <span class="plus-icon">+</span> Ajouter le musée
     </button>
   </div>

@@ -33,22 +33,22 @@
             </span>
           </h3>
           <p class="museum-category">
-            @if (museum.category == 'Archaeological') {
-            <i class="bi bi-archive"></i>
-            }
-            @if (museum.category == 'Ethnographic') {
-            <i class="bi bi-people"></i>
-            }
-            @if (museum.category == 'Islamic Art') {
-            <i class="bi bi-stars"></i>
-            }
-            @if (museum.category == 'Traditional Arts') {
-            <i class="bi bi-palette"></i>
-            }
-            @if (museum.category == 'Modern Art') {
-            <i class="bi bi-brush"></i>
-            }
-            {{ museum.category }} • {{ museum.location }}
+                    @if (museum.category == 'Archaeological') {
+            <i class="bi bi-archive"></i> Archéologique • {{ museum.location }}
+          }
+          @if (museum.category == 'Ethnographic') {
+            <i class="bi bi-people"></i> Ethnographique • {{ museum.location }}
+          }
+          @if (museum.category == 'Islamic Art') {
+            <i class="bi bi-stars"></i> Art islamique • {{ museum.location }}
+          }
+          @if (museum.category == 'Traditional Arts') {
+            <i class="bi bi-palette"></i> Arts traditionnels • {{ museum.location }}
+          }
+          @if (museum.category == 'Modern Art') {
+            <i class="bi bi-brush"></i> Art moderne • {{ museum.location }}
+          }
+
           </p>
           <div class="museum-meta">
             <span class="location"><i class="bi bi-geo-alt"></i> {{ museum.location }}</span>

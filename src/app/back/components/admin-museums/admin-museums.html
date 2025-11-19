@@ -27,7 +27,23 @@
     <img [src]="museum.photo">
   </div>
       <div class="museum-info">
-        <p class="museum-category">{{ museum.category }}</p>
+
+              @if (museum.category == 'Archaeological') {
+       <p class="museum-category"> <i class="bi bi-archive"></i> Archéologique </p>
+      }
+      @if (museum.category == 'Ethnographic') {
+       <p class="museum-category"> <i class="bi bi-people"></i> Ethnographique</p>
+      }
+      @if (museum.category == 'Islamic Art') {
+       <p class="museum-category"><i class="bi bi-stars"></i> Art islamique </p>
+      }
+      @if (museum.category == 'Traditional Arts') {
+       <p class="museum-category"> <i class="bi bi-palette"></i> Arts traditionnels </p>
+      }
+      @if (museum.category == 'Modern Art') {
+       <p class="museum-category"> <i class="bi bi-brush"></i> Art moderne </p>
+}
+
         <p class="museum-name">{{ museum.name }}, {{ museum.location }}</p>
                 </div>
             <div class="museum-actions">
