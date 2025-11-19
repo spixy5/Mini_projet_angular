@@ -27,6 +27,7 @@ export class MuseumList implements OnInit{
   }
     filterByCategory(category: string): void {
     this.selectedCategory = category;
+    this.searchTerm='';
     if(this.selectedCategory!='Tous'){
    this.museums=this.constMuseum.filter(museum => museum.category==this.selectedCategory 
   );
@@ -37,6 +38,7 @@ export class MuseumList implements OnInit{
   }
   filterByName(): void {
   if (this.searchTerm) {
+    this.selectedCategory='Tous';
     this.museums = this.constMuseum.filter(museum =>museum.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   } else {

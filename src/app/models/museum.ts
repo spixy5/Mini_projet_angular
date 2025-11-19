@@ -9,7 +9,9 @@ export interface Museum {
   entry_price: number;
   visits: number;
   location: string;
-  created_at:Date;
+  created_at: Date;
   category: 'Archaeological' | 'Ethnographic' | 'Islamic Art' | 'Traditional Arts' | 'Modern Art';
+  opening_hour: Date; 
+  closing_hour: Date; 
   commenst?: Comment[];
 }

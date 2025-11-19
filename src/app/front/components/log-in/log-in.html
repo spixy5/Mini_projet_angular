@@ -16,7 +16,7 @@
             </div>   }   
         <div class="password-row">
           <label for="password">Mot de passe</label>
-         <a class="forgot-password" [routerLink]="['/forgot-password']">Mot de passe oublié ?</a>
+         <a class="forgot-password" (click)="routerForgotPass()">Mot de passe oublié ?</a>
         </div>
         <input type="password" id="password" formControlName="password" autocomplete="current-password" />
            @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched)

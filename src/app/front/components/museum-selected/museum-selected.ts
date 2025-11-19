@@ -29,7 +29,11 @@ private route = inject(ActivatedRoute);
   onVisitClick() {
     const userId = localStorage.getItem('userId'); 
     if (userId) {
-      this.router.navigate(['/pay']);
+      if(this.museum.is_open==1)
+      this.router.navigate(['museum',this.museumId,'pay-ticket']);
+    else{
+      alert("Le musée est fermé.");
+    }
     } else {
       this.router.navigate(['/login']);
     }

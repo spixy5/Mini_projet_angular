@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Comment } from '../../../models/comment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceMuseum } from '../../../services/service-museum';
@@ -10,23 +10,23 @@ import { ServiceMuseum } from '../../../services/service-museum';
 })
 export class MuseumComments implements OnInit{
   private router:Router=inject(Router);
-   museumId!: number;
-  comments: Comment[] = []; 
+   @Input() museumId!: number;
+  comments: Comment[]=[]; 
   private route: ActivatedRoute=inject(ActivatedRoute);
     private museumService: ServiceMuseum=inject(ServiceMuseum);
   ngOnInit(): void {
-    this.museumId = Number(this.route.snapshot.paramMap.get('id'));
-   this.museumService.getAllComments(this.museumId).subscribe(
+    if(this.museumId)
+  { this.museumService.getAllComments(this.museumId).subscribe(
       data => {
          if (data.success) {
-           this.comments=data;
+           this.comments=data.comments;
       } else {
         console.error('Failed to load comments');
     
       }
       },
    
-    );
+    );}
   }
 onSubmitComment(comment :string) {
   const userId = localStorage.getItem('userId');

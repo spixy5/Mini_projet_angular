@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Museum } from '../models/museum';
 import { Comment } from '../models/comment';
+import { PromoCode } from '../models/promo-code';
 
 @Injectable({
   providedIn: 'root',
@@ -26,9 +27,19 @@ export class ServiceMuseum {
     return this.http.delete<void>(`${this.URL}/delete_museums.php?id=${id}`);
   }
     getAllComments(museumId: number): Observable<any> {
-    return this.http.get<Comment[]>(`${this.URL}/get_museum_comments.php?museumId=${museumId}`);
+    return this.http.get<any>(`${this.URL}/get_museum_comments.php?museumId=${museumId}`);
   }
   addComment(comment: Comment): Observable<any> {
   return this.http.post<Comment>(`${this.URL}/add_comment.php`,comment);
 }
+  getAllPromoCodes(): Observable<any> {
+  return this.http.get<any>(`${this.URL}/get_all_promo_codes.php`);
+}
+sendTicketPayment(ticket: any): Observable<any> {
+  return this.http.post<any>(`${this.URL}/payment.php`, ticket);
+}
+markPromoCodeAsUsed(code: string): Observable<any> {
+  return this.http.post<any>(`${this.URL}/use_promo_code.php`,{code });
+}
+
 }

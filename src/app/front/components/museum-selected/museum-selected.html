@@ -47,9 +47,11 @@
     </div>
     <section class="comments-section mt-5">
       <h2 class="comments-title mb-3">Commentaires</h2>
-      <div class="comments-links mt-4">
-        <app-museum-comments></app-museum-comments>
+      @if(museum?.id){
+        <div class="comments-links mt-4">
+        <app-museum-comments [museumId]="museum.id"></app-museum-comments>
       </div>
+      }
     </section>
   </section>
 </div>

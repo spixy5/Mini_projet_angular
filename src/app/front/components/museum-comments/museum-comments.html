@@ -3,7 +3,6 @@
     <h3>Commentaires</h3>
     <span class="comments-count">{{ comments.length }} avis</span>
   </div>
-
   <ul class="comments-list">
     @for(comment of comments ;track comment.id)
     {  <li class="comment-item" key="@comment.id">
@@ -25,7 +24,7 @@
       </li>}
 
   </ul>
-<form class="add-comment-form" (submit)="onSubmitComment(comment.value); $event.preventDefault()" role="form" aria-label="Ajouter un commentaire">
+<form class="add-comment-form" (submit)="onSubmitComment(comment.value)" role="form" aria-label="Ajouter un commentaire">
   <label for="new-comment" class="visually-hidden">Écrivez votre commentaire ici</label>
   <textarea id="new-comment" placeholder="Écrivez votre commentaire ici..." rows="3" aria-multiline="true" #comment></textarea>
   <button type="submit" class="submit-comment-btn">
