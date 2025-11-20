@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'getDate'
 })
 export class GetDatePipe implements PipeTransform {
-
    transform(value: Date): string | null {
     if (!value) return null;
     const date = new Date(value);

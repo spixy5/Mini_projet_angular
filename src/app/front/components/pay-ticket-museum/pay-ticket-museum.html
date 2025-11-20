@@ -56,7 +56,7 @@
         <div class="form-column quantity-promo">
           <div class="input-group quantity-input">
             <label for="ticket-count">Nombre de billets</label>
-            <input id="ticket-count" name="ticketCount" type="number" min="1" formControlName="ticketCount" aria-label="Nombre de billets"/>
+            <input id="ticket-count" name="ticketCount" type="number" min="1" formControlName="ticketCount" aria-label="Nombre de billets" (change)="calculateTotalAmount()"/>
           </div>
         
           <div class="input-group promo-code">
@@ -157,7 +157,7 @@
           <div class="order-row">
             <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × {{ paymentForm.get('visitDetails.ticketType')?.value}})</dt>
            @if(museum){
-             <dd>{{totalAmount}}</dd>
+             <dd>{{totalTicketsAmount}}</dd>
            }
           </div>
           <div class="order-row">

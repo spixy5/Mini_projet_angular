@@ -62,6 +62,7 @@ import { User } from '../../../models/user';
           data=>{
             if(data.success){
               this.users=data.users;
+              this.users=this.users.filter(u => u.role!='admin')
             }
             else{
               alert('error :'+data.message)
@@ -72,6 +73,20 @@ import { User } from '../../../models/user';
   }
 
 
+calculatePerformance(museum: Museum): number {
+  const visits= Number(museum.visits) || 0;
+  const tickets=Number(museum.tickets) || 0;
+  if (visits==0) return 0;
+  const percentage=(tickets / visits) * 200 - 100;
+  return Math.round(percentage);
+}
+isActive(lastLogin?: Date): boolean {
+  if (!lastLogin) return false;
+  const today = new Date();
+  const last = new Date(lastLogin);
+  const diffMonths = (today.getFullYear()-last.getFullYear()) * 12 + (today.getMonth()-last.getMonth());
+  return diffMonths < 1;
+}
 
 
 

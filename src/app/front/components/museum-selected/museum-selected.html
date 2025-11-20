@@ -16,24 +16,41 @@
             </div>
           </div>
 
-          <div class="museum-meta d-grid gap-3 grid-2-cols">
-            <div class="meta-item">
-              <label><i class="fas fa-map-marker-alt"></i> Adresse</label>
-              <p>{{ museum?.location }}</p>
-            </div>
-            <div class="meta-item">
-              <label><i class="fas fa-calendar-alt"></i> Fondé le</label>
-              <p>{{ museum?.created_at | date:'d MMMM yyyy' }}</p>
-            </div>
-            <div class="meta-item">
-              <label><i class="fas fa-ticket-alt"></i> Tarif</label>
-              <p>{{ museum?.entry_price }} DT</p>
-            </div>
-            <div class="meta-item">
-              <label><i class="fas fa-heartbeat"></i> Statut</label>
-              <p>{{ museum?.is_open ? 'Ouvert' : 'Fermé' }}</p>
-            </div>
-          </div>
+                  <div class="museum-meta">
+                <h5>Informations</h5>
+
+                <div class="meta-item">
+                  <label><i class="bi bi-geo-alt"></i> Lieu</label>
+                  <p>{{ museum?.location }}</p>
+                </div>
+
+                <div class="meta-item">
+                  <label><i class="bi bi-tags"></i> Catégorie</label>
+                  <p>{{ museum?.category }}</p>
+                </div>
+
+                <div class="meta-item">
+                  <label><i class="bi bi-calendar-plus"></i> Créer lieu</label>
+                  <p>{{ museum?.created_at | date:'d MMMM yyyy' }}</p>
+                </div>
+
+                <div class="meta-item">
+                  <label><i class="bi bi-clock"></i> Horaire</label>
+                  <p>{{('2025-01-01T' + museum?.opening_hour) | date:'HH:mm' }} - {{ ('2025-01-01T' + museum?.closing_hour) | date:'HH:mm' }}</p>
+                </div>
+
+                <div class="meta-item">
+                  <label><i class="bi bi-ticket-perforated"></i> Prix d’entrée</label>
+                  <p>{{ museum?.entry_price }} DT</p>
+                </div>
+
+                <div class="meta-item">
+                  <label><i class="bi bi-eye"></i> Visite</label>
+                  <p>{{ museum?.visits }}</p>
+                </div>
+              </div>
+
+
         </div>
         <div class="museum-actions mt-4 d-flex gap-3">
                     <button class="btn btn-primary btn-visit" (click)="onVisitClick()">
@@ -49,7 +66,7 @@
       <h2 class="comments-title mb-3">Commentaires</h2>
       @if(museum?.id){
         <div class="comments-links mt-4">
-        <app-museum-comments [museumId]="museum.id"></app-museum-comments>
+        <app-museum-comments [museumId]="museum.id || 0"></app-museum-comments>
       </div>
       }
     </section>

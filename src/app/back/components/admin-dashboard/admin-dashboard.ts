@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import {  Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,6 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class AdminDashboard {
 userId: string | null=null;
 userRole: string | null=null;
+private router:Router=inject(Router)
 onRole(): boolean {
   if (typeof localStorage !='undefined') {
     this.userId = localStorage.getItem('userId');
@@ -19,6 +20,8 @@ onRole(): boolean {
   return false; 
 }
 OnlogOut(){
-  localStorage.clear()
+  localStorage.clear();
+  this.router.navigate(['/home'])
+
 }
 }

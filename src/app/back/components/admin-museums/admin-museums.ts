@@ -48,4 +48,7 @@ deleteMuseum(museumId :number){
       );
 
 }
+museumsLength(): number {
+  return this.museums.length;
+}
 }

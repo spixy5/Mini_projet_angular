@@ -8,11 +8,9 @@ include 'db_connection.php';
 $data = json_decode(file_get_contents('php://input'), true);
 $email = isset($data['email']) ? $data['email'] : '';
 $password = isset($data['password']) ? $data['password'] : '';
-
-$sql = "SELECT id, name, email, password_hash, role FROM users WHERE email = '$email'";
+$sql = "SELECT id, name, email, password_hash, role, banned FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
-
-if (!$result || mysqli_num_rows($result) == 0) {
+if (!$result || mysqli_num_rows($result)==0) {
     echo json_encode([
         "success" => false,
         "message" => "Email non trouvé"
@@ -21,7 +19,13 @@ if (!$result || mysqli_num_rows($result) == 0) {
 }
 
 $user = mysqli_fetch_assoc($result);
-
+if ($user['banned']==1) {
+    echo json_encode([
+        "success" => true,
+        "banned" => 1
+    ]);
+    exit();
+}
 if (password_verify($password, $user['password_hash'])) {
     $update = "UPDATE users SET last_login = NOW() WHERE id = {$user['id']}";
     mysqli_query($conn, $update);
@@ -33,6 +37,7 @@ if (password_verify($password, $user['password_hash'])) {
             "name" => $user['name'],
             "email" => $user['email'],
             "role" => $user['role'],
+            "banned" => $user['banned']
         ]
     ]);
 } else {

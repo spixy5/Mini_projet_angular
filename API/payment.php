@@ -30,8 +30,8 @@ $sql = "INSERT INTO tickets
 if (mysqli_query($conn, $sql)) {
 
     $subject = "Confirmation de votre réservation - Musée de Tunisie";
-    $headers = "From: no-reply@museumtunisie.com\r\n";
-    $headers .= "Reply-To: no-reply@museumtunisie.com\r\n";
+    $headers = "From: no-reply@Artevia.com\r\n";
+    $headers .= "Reply-To: no-reply@Artevia.com\r\n";
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
     $message = "Bonjour $user_email,\n\n";
     $message .= "Merci pour votre réservation. Voici le récapitulatif de votre billet :\n";

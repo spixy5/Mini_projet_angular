@@ -29,4 +29,10 @@ export class ServiceUser {
   updateActivity(id: number): Observable<any> {
     return this.http.post<any>(`${this.URL}/update_activity_user.php`,{id});
   }
+  suspendUser(id: number): Observable<any> {
+  return this.http.post<any>(`${this.URL}/suspend_user.php`,{id});
+}
+banUser(id: number): Observable<any> {
+  return this.http.post<any>(`${this.URL}/ban_user.php`,{id});
+}
 }

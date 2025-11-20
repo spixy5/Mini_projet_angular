@@ -12,7 +12,7 @@ if ($museumId <= 0) {
     ]);
     exit();
 }
-$sql = "SELECT * FROM museum_comments WHERE museum_id = $museumId ORDER BY created_at DESC";
+$sql = "SELECT id, museum_id, author_name, author_email, comment, created_at, like_count FROM museum_comments WHERE museum_id = $museumId ORDER BY created_at DESC";
 $result = mysqli_query($conn, $sql);
 
 if (!$result) {

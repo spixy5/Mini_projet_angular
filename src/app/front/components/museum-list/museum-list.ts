@@ -38,7 +38,6 @@ export class MuseumList implements OnInit{
   }
   filterByName(){
   if (this.searchTerm) {
-    this.selectedCategory='Tous';
     this.museums = this.constMuseum.filter(museum =>museum.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   } else {

@@ -19,7 +19,7 @@ private fb: FormBuilder=inject(FormBuilder);
  ngOnInit(): void {
      this.loginForm=this.fb.group({
     email: ['', [ Validators.required,Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)]],
-    password: ['',   [Validators.required,Validators.maxLength(8)]]
+    password: ['',   [Validators.required,Validators.minLength(8)]]
   });
   this.userService.getAllUsers().subscribe(
     data=>{
@@ -41,11 +41,19 @@ login() {
   this.userService.login(email, password).subscribe(
     data => {
     if (data.success) {
-          localStorage.setItem('userId', data.user.id);
+          if(data.banned){
+            if(data.banned==1){
+                alert("Votre compte a été banni. Vous ne pouvez plus accéder à ce compte.");
+            }
+          }
+          else{
+             localStorage.setItem('userId', data.user.id);
           localStorage.setItem('userName', data.user.name);
           localStorage.setItem('userEmail', data.user.email);
           localStorage.setItem('role', data.user.role);
           this.router.navigate(['/home']);
+         
+          }
         } else {
           alert('Erreur:'+data.message);
         }

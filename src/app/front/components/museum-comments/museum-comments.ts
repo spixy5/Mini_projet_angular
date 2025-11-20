@@ -16,7 +16,7 @@ export class MuseumComments implements OnInit{
   private userService: ServiceUser=inject(ServiceUser);
      @Input() museumId!: number;
   comments: Comment[]=[]; 
-
+  like=false;
   ngOnInit(): void {
     if(this.museumId)
   { this.museumService.getAllComments(this.museumId).subscribe(
@@ -49,12 +49,31 @@ onSubmitComment(comment :string) {
   this.museumService.addComment(newComment).subscribe(
     data => {
       console.log(data);
-      this.comments.push(data);
+      this.comments.push(data.comment);
       const userId = Number(localStorage.getItem('userId'));
       this.userService.updateActivity(userId).subscribe(
-        data=>console.log(data)
+        data=>{console.log(data)
+        }
       )
     });
+}
+toggleLike(id_comment:number =0){
+    if (id_comment == 0) return;
+   const userId = localStorage.getItem('userId');
+  if (!userId) {
+    this.router.navigate(['/login']);
+    return;
+  }
+  this.museumService.toggleLike(Number(userId),id_comment).subscribe(
+    data=>{
+      console.log(data)
+      this.like=data.success
+      const comment=this.comments.find(c => c.id==id_comment);
+      if(comment)
+      comment.like_count=data.like_count
+
+    }
+  )
 }
 
 }

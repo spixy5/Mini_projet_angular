@@ -14,6 +14,7 @@ import { AdminModifyMuseum } from './back/components/admin-modify-museum/admin-m
 import { AdminAddMuseum } from './back/components/admin-add-museum/admin-add-museum';
 import { AdminMuseums } from './back/components/admin-museums/admin-museums';
 import { Admin } from './back/components/admin/admin';
+import { AdminSelectedUser } from './back/components/admin-selected-user/admin-selected-user';
 
   export const routes: Routes = [
 { path: 'home', component: Home, title: 'Accueil' },
@@ -30,6 +31,7 @@ import { Admin } from './back/components/admin/admin';
 { path: 'admin/museum/:id/modify', component: AdminModifyMuseum, title: 'Modifier un musée' },
 { path: 'admin/add-museum', component: AdminAddMuseum, title: 'Ajouter un musée' },
 { path: 'admin/users', component: AdminUsers, title: 'Utilisateurs' },
+{ path: 'admin/user/:id', component: AdminSelectedUser, title: 'Utilisateur sélectionné' },
 { path: 'admin/statistics', component: AdminStatistics, title: 'Statistiques' },
 { path: '', component: Home, title: 'Accueil' },
 { path: '**', redirectTo: 'home' }

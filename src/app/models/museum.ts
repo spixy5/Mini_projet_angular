@@ -1,6 +1,5 @@
 import { Comment } from "./comment";
 import { Ticket } from "./ticket";
-
 export interface Museum {
   id?: number;
   name: string;

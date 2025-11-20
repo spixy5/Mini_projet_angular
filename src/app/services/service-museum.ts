@@ -41,9 +41,11 @@ sendTicketPayment(ticket: any): Observable<any> {
 markPromoCodeAsUsed(code: string): Observable<any> {
   return this.http.post<any>(`${this.URL}/use_promo_code.php`,{code });
 }
-    getAllTickets(): Observable<any> {
+  getAllTickets(): Observable<any> {
     return this.http.get<any>(`${this.URL}/get_all_tickets.php`);
   }
-
+toggleLike(userId: number, commentId: number): Observable<any> {
+  return this.http.post<any>(`${this.URL}/toggle_like.php`, {user_id: userId,comment_id: commentId});
+}
 
 }

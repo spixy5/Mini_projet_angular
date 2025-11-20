@@ -4,18 +4,17 @@
     <span class="comments-count">{{ comments.length }} avis</span>
   </div>
   <ul class="comments-list">
-    @for(comment of comments ;track comment.id)
-    {  <li class="comment-item" key="@comment.id">
+    @for(comment of comments ;track $index)
+    {  <li class="comment-item">
         <div class="comment-avatar">
-          <img src="@comment.avatarUrl ?? 'https://ui-avatars.com/api/?name=' + comment.author_name + '&background=3579b0&color=ffffff'" 
-               alt="@comment.author_name" />
+         <i class="bi bi-person-circle"></i>
         </div>
         <div class="comment-content">
-          <div class="comment-author">@comment.author_name</div>
-          <p>@comment.comment</p>
+          <div class="comment-author">{{comment.author_name}}</div>
+          <p>{{comment.comment}}</p>
         </div>
-        <button class="like-btn" aria-label="J'aime">
-          <i class="bi bi-heart"></i> J'aime
+        <button class="like-btn" aria-label="J'aime" (click)="toggleLike(comment?.id)">
+          <i class="bi bi-heart"></i>{{ comment.like_count }} {{ comment.like_count != 1 ? 'J\'aimes' : 'J\'aime' }}
         </button>
       </li>}
     @empty()
@@ -24,10 +23,10 @@
       </li>}
 
   </ul>
-<form class="add-comment-form" (submit)="onSubmitComment(comment.value)" role="form" aria-label="Ajouter un commentaire">
+<form class="add-comment-form"  role="form" aria-label="Ajouter un commentaire">
   <label for="new-comment" class="visually-hidden">Écrivez votre commentaire ici</label>
   <textarea id="new-comment" placeholder="Écrivez votre commentaire ici..." rows="3" aria-multiline="true" #comment></textarea>
-  <button type="submit" class="submit-comment-btn">
+  <button type="button" class="submit-comment-btn" (click)="onSubmitComment(comment.value)">
     <i class="bi bi-send"></i> Publier le commentaire
   </button>
 </form>
