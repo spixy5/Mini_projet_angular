@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiceUser } from '../../../services/service-user';
 import { Router } from '@angular/router';
+import { User } from '../../../models/user';
 @Component({
   selector: 'app-admin',
   imports: [ReactiveFormsModule],
@@ -12,12 +13,21 @@ export class Admin implements OnInit{
   private fb: FormBuilder=inject(FormBuilder) 
   private serviceUser: ServiceUser=inject(ServiceUser)
   private router:Router=inject(Router);
+  userService :ServiceUser=inject(ServiceUser);
+    users:User[]=[];
+    filteredUsers: User[] = [];
   adminForm!: FormGroup;
 ngOnInit(): void {
       this.adminForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+      this.userService.getAllUsers().subscribe(
+    data=>{
+      if(data.success){
+        this.users=data.users;
+
+      }})
 }
   
 
@@ -41,6 +51,24 @@ onSubmit() {
         }
 });
   }
+}
+updatePassword(){
+   const email = this.adminForm.get('username')?.value?.trim();
+  if (!email) {
+    alert('Veuillez entrer votre email.');
+    return;
+  }
+  const emailRegex =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert('Veuillez entrer un email valide.');
+    return;
+  }
+this.filteredUsers=this.users.filter(user => user.email==email);
+          if (this.filteredUsers.length==0) {
+          alert('Email introuvable.');
+        } else {
+            this.router.navigate(['/forgotpassword',email]);
+        }
 }
 
 }

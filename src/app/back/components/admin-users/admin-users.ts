@@ -16,7 +16,8 @@ export class AdminUsers implements OnInit{
       data=>{
         if(data.success){
           this.users=data.users;
-          this.users=this.users.filter(u => u.role!='admin' && u.banned==0)
+          this.users=this.users.filter(u => u.role!='admin');
+
         }
         else{
           console.log('error :'+data.message)
@@ -31,7 +32,7 @@ export class AdminUsers implements OnInit{
         if(data.success){
           console.log(data);
            if(data.ban==1){
-            this.users=this.users.filter(u => u.id!=id);
+ 
            }
         }
         else{
@@ -46,7 +47,6 @@ export class AdminUsers implements OnInit{
       data=>{
         if(data.success){
           console.log(data)
-            this.users=this.users.filter(u => u.id!=id);
         }
         else{
           console.log('error:' +data.message)

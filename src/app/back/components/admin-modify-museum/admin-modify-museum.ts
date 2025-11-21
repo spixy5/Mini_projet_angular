@@ -2,13 +2,13 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiceMuseum } from '../../../services/service-museum';
 import { Museum } from '../../../models/museum';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { GetDatePipe } from '../../../pipe/get-date-pipe';
 import { ServiceUser } from '../../../services/service-user';
 
 @Component({
   selector: 'app-admin-modify-museum',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './admin-modify-museum.html',
   styleUrl: './admin-modify-museum.css',
 })

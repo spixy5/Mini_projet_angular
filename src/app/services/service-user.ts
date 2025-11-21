@@ -17,6 +17,9 @@ export class ServiceUser {
     getAllUsers(): Observable<any> {
     return this.http.get<any>(`${this.URL}/get_all_users.php`);
   }
+    getUserById(id:number): Observable<any> {
+    return this.http.get<any>(`${this.URL}/get_user_by_id.php?id=${id}`);
+  }
    sendConfirmationCode(email: string): Observable<any> {
     return this.http.post<any>(`${this.URL}/send_confirmation_code.php`,{email});
   }
@@ -35,4 +38,7 @@ export class ServiceUser {
 banUser(id: number): Observable<any> {
   return this.http.post<any>(`${this.URL}/ban_user.php`,{id});
 }
+  getAllComments(userEmail: string): Observable<any> {
+    return this.http.get<any>(`${this.URL}/get_comments_user.php?userEmail=${userEmail}`);
+  }
 }

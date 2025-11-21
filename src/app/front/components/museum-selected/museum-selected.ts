@@ -12,7 +12,7 @@ import { ServiceUser } from '../../../services/service-user';
   styleUrl: './museum-selected.css',
 })
 export class MuseumSelected {
-private route = inject(ActivatedRoute);
+private route:ActivatedRoute = inject(ActivatedRoute);
  private router: Router=inject(Router);
   private museumService:ServiceMuseum = inject(ServiceMuseum);
   private userService:ServiceUser=inject(ServiceUser)

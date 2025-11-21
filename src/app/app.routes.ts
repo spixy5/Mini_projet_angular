@@ -15,7 +15,6 @@ import { AdminAddMuseum } from './back/components/admin-add-museum/admin-add-mus
 import { AdminMuseums } from './back/components/admin-museums/admin-museums';
 import { Admin } from './back/components/admin/admin';
 import { AdminSelectedUser } from './back/components/admin-selected-user/admin-selected-user';
-
   export const routes: Routes = [
 { path: 'home', component: Home, title: 'Accueil' },
 { path: 'login', component: LogIn, title: 'Connexion' },
