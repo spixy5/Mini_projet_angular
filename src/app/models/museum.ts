@@ -13,6 +13,6 @@ export interface Museum {
   category: 'Archaeological' | 'Ethnographic' | 'Islamic Art' | 'Traditional Arts' | 'Modern Art';
   opening_hour: Date; 
   closing_hour: Date; 
-  commenst?: Comment[];
+  comments?: Comment[];
   tickets? :Ticket[];
 }

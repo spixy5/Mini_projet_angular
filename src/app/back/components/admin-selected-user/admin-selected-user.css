@@ -112,8 +112,6 @@
 .activity-ico { font-size:1.5rem; color:#3579b0; }
 .activity-label { font-size:0.75rem; color:#8ea0b3; font-weight:700; text-transform:lowercase }
 .activity-value { font-weight:800; font-size:1.05rem; color:#0b1220 }
-
-
 .internal-notes { width:100%; min-height:56px; border:1px solid #e7edf6; border-radius:8px; padding:10px 12px; color:#8ea0b3 }
 .comments-list { list-style:none; margin:0; padding:0 }
 .comment-item { display:flex; gap:12px; align-items:flex-start; justify-content:space-between; background:#f2f5f8; border-radius:8px; padding:14px 16px; margin-bottom:12px }
@@ -154,7 +152,7 @@
   padding: 24px 28px 28px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #0b1220;
-  max-width: 720px;
+  max-width: 100%;
 }
 
 .user-comments > header h2 {

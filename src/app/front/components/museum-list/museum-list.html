@@ -13,7 +13,6 @@
         <button class="filter-btn" [class.active]="selectedCategory=='Islamic Art'" (click)="filterByCategory('Islamic Art')">Histoire</button>
         <button class="filter-btn" [class.active]="selectedCategory=='Ethnographic'" (click)="filterByCategory('Ethnographic')">Ethnographie</button>
       </div>
-
       <div class="search-box">
         <i class="bi bi-search"></i>
         <input type="text" placeholder="Rechercher un musée..." [(ngModel)]="searchTerm" (ngModelChange)="filterByName()">

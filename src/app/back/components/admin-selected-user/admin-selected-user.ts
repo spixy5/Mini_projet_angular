@@ -24,6 +24,7 @@ export class AdminSelectedUser implements OnInit{
         this.userService.getAllComments(this.user.email).subscribe(
           data => {console.log(data)
             this.comments=data.comments
+            
           }
         )
 
@@ -37,5 +38,8 @@ getDaysSinceLastLogin(lastLogin?: Date): number {
   const now=new Date();
   const diffTime=Math.abs(now.getTime()-last.getTime());
   return Math.floor(diffTime/(1000 * 60 * 60 * 24)); 
+}
+onDeleteComment(comment_id:number){
+
 }
 }

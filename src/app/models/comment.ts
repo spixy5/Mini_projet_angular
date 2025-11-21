@@ -4,6 +4,6 @@ export interface Comment {
   like_count?: number;
   author_name: string;
   author_email: string;
-  comment: string;
+  message: string;
   created_at?: string;
 }

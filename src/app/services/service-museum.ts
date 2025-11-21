@@ -23,6 +23,9 @@ export class ServiceMuseum {
   updateMuseum(museum: Museum): Observable<any> {
     return this.http.put<Museum>(`${this.URL}/update_museum.php`, museum);
   }
+   updateMuseumVisits(museum_id: number): Observable<any> {
+    return this.http.put<Museum>(`${this.URL}/update_visits_museum.php`, museum_id);
+  }
     deleteMuseum(id: number): Observable<any> {
     return this.http.get<Museum>(`${this.URL}/delete_museum.php?id=${id}`);
   }

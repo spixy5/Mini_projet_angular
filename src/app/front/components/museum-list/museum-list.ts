@@ -3,7 +3,6 @@ import { ServiceMuseum } from '../../../services/service-museum';
 import { Museum } from '../../../models/museum';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-
 @Component({
   selector: 'app-museum-list',
   imports: [FormsModule,RouterLink],
@@ -11,8 +10,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './museum-list.css',
 })
 export class MuseumList implements OnInit{
-  private museumService :ServiceMuseum = inject(ServiceMuseum);
-  constMuseum:Museum[]=[];
+  readonly museumService :ServiceMuseum = inject(ServiceMuseum);
+  allMuseums:Museum[]=[];
   museums: Museum[]=[];
   selectedCategory: string = 'Tous';
   searchTerm: string = '';
@@ -21,28 +20,24 @@ export class MuseumList implements OnInit{
        data => {
          console.log(data)
         this.museums = data
-        this.constMuseum=data
+        this.allMuseums=data
        }
       );
   }
-    filterByCategory(category: string) {
-    this.selectedCategory = category;
-    this.searchTerm='';
-    if(this.selectedCategory!='Tous'){
-   this.museums=this.constMuseum.filter(museum => museum.category==this.selectedCategory 
-  );
- }
- else{
-  this.museums=this.constMuseum
- }
-  }
-  filterByName(){
-  if (this.searchTerm) {
-    this.museums = this.constMuseum.filter(museum =>museum.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-  } else {
-    this.museums = this.constMuseum;
-  }
+  applyFilters() {
+  this.museums=this.allMuseums.filter(museum => {
+    const category=this.selectedCategory=='Tous' || museum.category==this.selectedCategory;
+    const name=!this.searchTerm || museum.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+    return category && name;
+  });
+}
+
+ filterByCategory(category: string) {
+  this.selectedCategory=category;
+  this.applyFilters();
+}
+filterByName() {
+  this.applyFilters();
 }
 
 }

@@ -42,7 +42,7 @@ forgotPasswordForm!: FormGroup;
     if (!control.parent) return null; 
     const passwordValue = control.parent.get(passwordControlName)?.value;
     if (!passwordValue) return null; 
-    return control.value === passwordValue ? null : { notMatching: true };
+    return control.value==passwordValue ? null : { notMatching: true };
   };}
  onSubmit(): void {
   if (this.forgotPasswordForm.valid) {

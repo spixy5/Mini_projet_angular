@@ -15,22 +15,20 @@ if (!$user_id || !$comment_id) {
     ]);
     exit();
 }
-
-$check_sql = "SELECT * FROM likes WHERE user_id = $user_id AND comment_id = $comment_id";
-$check_result = mysqli_query($conn, $check_sql);
-if ($check_result && mysqli_num_rows($check_result) > 0) {
-    mysqli_query($conn, "DELETE FROM likes WHERE user_id = $user_id AND comment_id = $comment_id");
-    $liked = false;
-    mysqli_query($conn, "UPDATE museum_comments SET like_count = like_count - 1 WHERE id = $comment_id");
-} else {
-    mysqli_query($conn, "INSERT INTO likes (user_id, comment_id) VALUES ($user_id, $comment_id)");
+$liked=false;
+$check_sql = "SELECT * FROM likes WHERE user_id=$user_id AND comment_id=$comment_id";
+$check_result=mysqli_query($conn, $check_sql);
+if ($check_result && mysqli_num_rows($check_result)==0) {
+     mysqli_query($conn, "INSERT INTO likes (user_id, comment_id) VALUES ($user_id, $comment_id)");
     $liked = true;
-    mysqli_query($conn, "UPDATE museum_comments SET like_count = like_count + 1 WHERE id = $comment_id");
+    mysqli_query($conn, "UPDATE museum_comments SET like_count=like_count+1 WHERE id = $comment_id");
+} else {
+    mysqli_query($conn, "DELETE FROM likes WHERE user_id = $user_id AND comment_id = $comment_id");
+    $liked=false;
+    mysqli_query($conn, "UPDATE museum_comments SET like_count=like_count-1 WHERE id=$comment_id"); 
 }
-
 $count_sql = "SELECT like_count FROM museum_comments WHERE id = $comment_id";
 $count_result = mysqli_query($conn, $count_sql);
-
 $like_count = 0;
 if ($count_result) {
     $row = mysqli_fetch_assoc($count_result);

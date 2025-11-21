@@ -1,30 +1,46 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Museum } from '../../../models/museum';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ServiceMuseum } from '../../../services/service-museum';
 import { DatePipe } from '@angular/common';
 import { MuseumComments } from '../museum-comments/museum-comments';
 import { ServiceUser } from '../../../services/service-user';
 @Component({
   selector: 'app-museum-selected',
-  imports: [DatePipe,MuseumComments],
+  imports: [DatePipe,MuseumComments,RouterLink],
   templateUrl: './museum-selected.html',
   styleUrl: './museum-selected.css',
 })
-export class MuseumSelected {
-private route:ActivatedRoute = inject(ActivatedRoute);
- private router: Router=inject(Router);
-  private museumService:ServiceMuseum = inject(ServiceMuseum);
-  private userService:ServiceUser=inject(ServiceUser)
+export class MuseumSelected implements OnInit{
+readonly route:ActivatedRoute = inject(ActivatedRoute);
+readonly router: Router=inject(Router);
+readonly museumService:ServiceMuseum = inject(ServiceMuseum);
+readonly userService:ServiceUser=inject(ServiceUser)
   museumId?: number;
   museum!: Museum;
+  userRole=localStorage.getItem('Role')
   ngOnInit(): void {
   this.museumId=Number(this.route.snapshot.paramMap.get('id'));
-      this.museumService.getMuseumById(this.museumId).subscribe(
+     if(this.museumId){
+        this.museumService.updateMuseumVisits(this.museumId).subscribe();
+       this.museumService.getMuseumById(this.museumId).subscribe(
       data => {
         console.log(data)
-        this.museum = data;
-        const userId = Number(localStorage.getItem('userId'));
+        this.museum=data;
+        if(this.museum.id){
+          this.museumService.getAllComments(this.museum.id).subscribe(
+          data => {
+         if (data.success) {
+           this.museum.comments=data.comments;
+      } else {
+        console.error('Failed to load comments');
+    
+      }
+      },
+   
+    );
+        }
+        const userId=Number(localStorage.getItem('userId'));
         if(userId){
         this.userService.updateActivity(userId).subscribe(
         data=>console.log(data)
@@ -32,8 +48,9 @@ private route:ActivatedRoute = inject(ActivatedRoute);
       }
       
     });
+     }
   }
-  onVisitClick() {
+  onBuyTicketClick() {
     const userId = localStorage.getItem('userId'); 
     if (userId) {
       if(this.museum.is_open==1)
@@ -46,8 +63,10 @@ private route:ActivatedRoute = inject(ActivatedRoute);
     }
   }
     onItineraryClick(name: string | undefined, location: string | undefined) {
-    const query = encodeURIComponent(`${name} ${location}`);
+   if(location && name){
+     const query = encodeURIComponent(`${name} ${location}`);
   window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
+   }
   }
 
 

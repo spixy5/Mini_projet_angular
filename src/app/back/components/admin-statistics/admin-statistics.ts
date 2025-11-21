@@ -7,7 +7,7 @@ import { ServiceUser } from '../../../services/service-user';
 import { User } from '../../../models/user';
 @Component({
   selector: 'app-admin-statistics',
-  imports: [DecimalPipe,DatePipe],
+  imports: [DatePipe],
   templateUrl: './admin-statistics.html',
   styleUrl: './admin-statistics.css',
 })
@@ -27,7 +27,7 @@ import { User } from '../../../models/user';
                      this.museumService.getAllComments(museum.id).subscribe(
                     data => {
                       if (data.success) {
-                    museum.commenst=data.comments;
+                    museum.comments=data.comments;
                 } else {
                   console.error('Failed to load comments');
               
