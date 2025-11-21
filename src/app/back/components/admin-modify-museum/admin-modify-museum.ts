@@ -14,13 +14,14 @@ import { ServiceUser } from '../../../services/service-user';
 })
 export class AdminModifyMuseum {
    museumForm!: FormGroup;
-  private fb: FormBuilder=inject(FormBuilder);
-  private museumService :ServiceMuseum=inject(ServiceMuseum)
-  private route = inject(ActivatedRoute);
- private router: Router=inject(Router);
- private userService:ServiceUser=inject(ServiceUser);
+  readonly fb: FormBuilder=inject(FormBuilder);
+  readonly museumService :ServiceMuseum=inject(ServiceMuseum)
+  readonly route = inject(ActivatedRoute);
+ readonly router: Router=inject(Router);
+ readonly userService:ServiceUser=inject(ServiceUser);
   museumId?: number;
     museum!: Museum;
+  pipe = new GetDatePipe();
   ngOnInit(): void {
      this.museumForm = this.fb.group({
       id: [0],
@@ -40,7 +41,7 @@ export class AdminModifyMuseum {
       data => {
         console.log(data)
         this.museum = data;
-        const pipe = new GetDatePipe();
+       
         this.museumForm.patchValue({
         id: this.museum.id,
         photo: this.museum.photo,
@@ -51,7 +52,7 @@ export class AdminModifyMuseum {
         opening_hour: this.museum.opening_hour,
         closing_hour: this.museum.closing_hour,
         category: this.museum.category,
-        created_at: pipe.transform(this.museum.created_at),
+        created_at: this.pipe.transform(this.museum.created_at),
         description: this.museum.description,
       });
       console.log(this.museumForm.value)
@@ -87,5 +88,20 @@ export class AdminModifyMuseum {
     }
 
   }
+  onReset(){
+ this.museumForm.patchValue({
+        id: this.museum.id,
+        photo: this.museum.photo,
+        name: this.museum.name,
+        location: this.museum.location,
+        is_open: this.museum.is_open,
+        entry_price: this.museum.entry_price,
+        opening_hour: this.museum.opening_hour,
+        closing_hour: this.museum.closing_hour,
+        category: this.museum.category,
+        created_at: this.pipe.transform(this.museum.created_at),
+        description: this.museum.description,
+      });
+}
 
 }

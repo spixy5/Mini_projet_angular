@@ -6,22 +6,22 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include 'db_connection.php';
 if (isset($_GET['id'])) {
     $id=$_GET['id'];
-    $checkSql = "SELECT * FROM museums WHERE id='$id'";
+    $checkSql = "SELECT * FROM museum_comments WHERE id='$id'";
     $checkResult = mysqli_query($conn, $checkSql);
     if (mysqli_num_rows($checkResult)==0) {
         echo json_encode(["success" => false, "message" => "Query failed:".mysqli_error($conn)]);
         exit();
     }
     if (mysqli_num_rows($checkResult)>0) {
-        $deleteSql="DELETE FROM museums WHERE id = '$id'";
+        $deleteSql="DELETE FROM museum_comments WHERE id = '$id'";
         $deleteResult = mysqli_query($conn, $deleteSql);
         if ($deleteResult) {
-            echo json_encode(["success" => true, "message" => "Museum deleted successfully"]);
+            echo json_encode(["success" => true, "message" => "Comment deleted successfully"]);
         } else {
             echo json_encode(["success" => false, "message" => "Deletion failed: " . mysqli_error($conn)]);
         }
     } else {
-        echo json_encode(["success" => false, "message" => "Museum not found"]);
+        echo json_encode(["success" => false, "message" => "Comment not found"]);
     }
 } else {
     echo json_encode(["success" => false, "message" => "ID parameter is required"]);

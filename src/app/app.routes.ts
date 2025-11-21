@@ -15,6 +15,8 @@ import { AdminAddMuseum } from './back/components/admin-add-museum/admin-add-mus
 import { AdminMuseums } from './back/components/admin-museums/admin-museums';
 import { Admin } from './back/components/admin/admin';
 import { AdminSelectedUser } from './back/components/admin-selected-user/admin-selected-user';
+import { authadminGuard } from './guards/authadmin-guard';
+import { authuserGuard } from './guards/authuser-guard';
   export const routes: Routes = [
 { path: 'home', component: Home, title: 'Accueil' },
 { path: 'login', component: LogIn, title: 'Connexion' },
@@ -24,14 +26,14 @@ import { AdminSelectedUser } from './back/components/admin-selected-user/admin-s
 { path: 'museums', component: MuseumList, title: 'Liste des musées' },
 { path: 'museum/:id', component: MuseumSelected, title: 'Musée sélectionné' },
 { path: 'museum/comments', component: MuseumComments, title: 'Commentaires du musée' },
-{ path: 'museum/:id/pay-ticket', component: PayTicketMuseum, title: 'Acheter un ticket' },
+{ path: 'museum/:id/pay-ticket', component: PayTicketMuseum, title: 'Acheter un ticket',canActivate:[authuserGuard] },
 { path: 'admin', component: Admin, title: 'Admin' },
-{ path: 'admin/museums', component: AdminMuseums, title: 'Admin Musées' },
-{ path: 'admin/museum/:id/modify', component: AdminModifyMuseum, title: 'Modifier un musée' },
-{ path: 'admin/add-museum', component: AdminAddMuseum, title: 'Ajouter un musée' },
-{ path: 'admin/users', component: AdminUsers, title: 'Utilisateurs' },
-{ path: 'admin/user/:id', component: AdminSelectedUser, title: 'Utilisateur sélectionné' },
-{ path: 'admin/statistics', component: AdminStatistics, title: 'Statistiques' },
+{ path: 'admin/museums', component: AdminMuseums, title: 'Admin Musées',canActivate:[authadminGuard] },
+{ path: 'admin/museum/:id/modify', component: AdminModifyMuseum, title: 'Modifier un musée' ,canActivate:[authadminGuard]},
+{ path: 'admin/add-museum', component: AdminAddMuseum, title: 'Ajouter un musée',canActivate:[authadminGuard] },
+{ path: 'admin/users', component: AdminUsers, title: 'Utilisateurs',canActivate:[authadminGuard] },
+{ path: 'admin/user/:id', component: AdminSelectedUser, title: 'Utilisateur sélectionné' ,canActivate:[authadminGuard]},
+{ path: 'admin/statistics', component: AdminStatistics, title: 'Statistiques' ,canActivate:[authadminGuard]},
 { path: '', component: Home, title: 'Accueil' },
 { path: '**', redirectTo: 'home' }
   ];

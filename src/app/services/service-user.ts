@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root',
@@ -41,4 +42,8 @@ banUser(id: number): Observable<any> {
   getAllComments(userEmail: string): Observable<any> {
     return this.http.get<any>(`${this.URL}/get_comments_user.php?userEmail=${userEmail}`);
   }
+  deleteCommentUser(id: number): Observable<any> {
+      return this.http.get<Comment>(`${this.URL}/delete_comment_user.php?id=${id}`);
+  }
 }
+

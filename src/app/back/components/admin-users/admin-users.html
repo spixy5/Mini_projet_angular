@@ -24,10 +24,10 @@
         <button class="btn btn-view" type="button" [routerLink]="['/admin/user',user.id]">
           <i class="bi bi-eye"></i> Voir
         </button>
-        <button class="btn btn-suspend" type="button" (click)="suspendUser(user.id)">
+        <button class="btn btn-suspend" type="button" (click)="suspendUser(user.id)" [disabled]="user.banned==1">
           <i class="bi bi-pause-circle"></i> Suspendre
         </button>
-        <button class="btn btn-ban" type="button" (click)="banUser(user.id)">
+        <button class="btn btn-ban" type="button" (click)="banUser(user.id)" [disabled]="user.banned==1">
           <i class="bi bi-person-x"></i> Bannir
         </button>
       </div>

@@ -18,7 +18,7 @@ readonly museumService:ServiceMuseum = inject(ServiceMuseum);
 readonly userService:ServiceUser=inject(ServiceUser)
   museumId?: number;
   museum!: Museum;
-  userRole=localStorage.getItem('Role')
+  userRole=localStorage.getItem('role')
   ngOnInit(): void {
   this.museumId=Number(this.route.snapshot.paramMap.get('id'));
      if(this.museumId){

@@ -22,12 +22,7 @@ ngOnInit(): void {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-      this.userService.getAllUsers().subscribe(
-    data=>{
-      if(data.success){
-        this.users=data.users;
-
-      }})
+ 
 }
   
 
@@ -63,6 +58,12 @@ updatePassword(){
     alert('Veuillez entrer un email valide.');
     return;
   }
+       this.userService.getAllUsers().subscribe(
+    data=>{
+      if(data.success){
+        this.users=data.users;
+
+      }})
 this.filteredUsers=this.users.filter(user => user.email==email);
           if (this.filteredUsers.length==0) {
           alert('Email introuvable.');

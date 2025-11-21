@@ -6,8 +6,8 @@
           <h2>Détail du musée</h2>
           <p class="museum-subtitle-header">Vue d'ensemble du musée sélectionné avec ses informations et commentaires.</p>
         </div>
-        @if(userRole && userRole=='admin'){
-            <button class="btn btn-outline-secondary btn-back" [routerLink]="['admin/museums']">
+        @if(userRole=='admin'){
+            <button class="btn btn-outline-secondary btn-back" [routerLink]="['/admin/museums']">
           <i class="bi bi-arrow-left"></i> Retour à la liste
         </button>
         }

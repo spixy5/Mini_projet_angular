@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServiceMuseum } from '../../../services/service-museum';
-import {  Router } from '@angular/router';
+import {  Router, RouterLink } from '@angular/router';
 import { ServiceUser } from '../../../services/service-user';
 
 @Component({
   selector: 'app-admin-add-museum',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './admin-add-museum.html',
   styleUrl: './admin-add-museum.css',
 })
@@ -55,6 +55,15 @@ export class AdminAddMuseum implements OnInit{
       )
     }
   }
+onReset(){
+  this.museumForm.reset();
+this.museumForm.get('photo')?.setValue('photos/');
+this.museumForm.get('opening_hour')?.setValue('00:00');
+this.museumForm.get('closing_hour')?.setValue('00:00');
+this.museumForm.get('entry_price')?.setValue(0);
+this.museumForm.get('category')?.setValue('Archaeological');
+this.museumForm.get('is_open')?.setValue(1);
 
+}
 
 }

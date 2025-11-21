@@ -39,7 +39,20 @@ getDaysSinceLastLogin(lastLogin?: Date): number {
   const diffTime=Math.abs(now.getTime()-last.getTime());
   return Math.floor(diffTime/(1000 * 60 * 60 * 24)); 
 }
-onDeleteComment(comment_id:number){
+onDeleteComment(comment_id:number | undefined){
+  if(comment_id){
+    this.userService.deleteCommentUser(comment_id).subscribe(
+      data=>
+      {
+        if(data.success){
+          this.comments=this.comments.filter(c => c.id!=comment_id)
+        }
+        else{
+          console.log('error :'+data.message)
+        }
+      }
+    )
+  }
 
 }
 }
