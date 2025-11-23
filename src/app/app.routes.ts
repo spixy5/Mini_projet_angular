@@ -9,10 +9,10 @@ import { MuseumComments } from './front/components/museum-comments/museum-commen
 import { PayTicketMuseum } from './front/components/pay-ticket-museum/pay-ticket-museum';
 import { AboutUs } from './front/components/about-us/about-us';
 import { AdminStatistics } from './back/components/admin-statistics/admin-statistics';
-import { AdminUsers } from './back/components/admin-users/admin-users';
+import { AdminUsers } from './back/components/admin-user-list/admin-user-list';
 import { AdminModifyMuseum } from './back/components/admin-modify-museum/admin-modify-museum';
 import { AdminAddMuseum } from './back/components/admin-add-museum/admin-add-museum';
-import { AdminMuseums } from './back/components/admin-museums/admin-museums';
+import { AdminMuseumList } from './back/components/admin-museum_list/admin-museum_list';
 import { Admin } from './back/components/admin/admin';
 import { AdminSelectedUser } from './back/components/admin-selected-user/admin-selected-user';
 import { authadminGuard } from './guards/authadmin-guard';
@@ -24,11 +24,13 @@ import { authuserGuard } from './guards/authuser-guard';
 { path: 'forgotpassword/:email', component: ForgotPassword, title: 'Mot de passe oublié' },
 { path: 'aboutus', component: AboutUs, title: 'A propos' },
 { path: 'museums', component: MuseumList, title: 'Liste des musées' },
-{ path: 'museum/:id', component: MuseumSelected, title: 'Musée sélectionné' },
-{ path: 'museum/comments', component: MuseumComments, title: 'Commentaires du musée' },
+{ path: 'museum/:id', component: MuseumSelected, title: 'Musée sélectionné', 
+   children: [
+    { path: 'comments', component: MuseumComments, title: 'Commentaires du musée' }
+  ] },
 { path: 'museum/:id/pay-ticket', component: PayTicketMuseum, title: 'Acheter un ticket',canActivate:[authuserGuard] },
 { path: 'admin', component: Admin, title: 'Admin' },
-{ path: 'admin/museums', component: AdminMuseums, title: 'Admin Musées',canActivate:[authadminGuard] },
+{ path: 'admin/museums', component: AdminMuseumList, title: 'Admin Musées',canActivate:[authadminGuard] },
 { path: 'admin/museum/:id/modify', component: AdminModifyMuseum, title: 'Modifier un musée' ,canActivate:[authadminGuard]},
 { path: 'admin/add-museum', component: AdminAddMuseum, title: 'Ajouter un musée',canActivate:[authadminGuard] },
 { path: 'admin/users', component: AdminUsers, title: 'Utilisateurs',canActivate:[authadminGuard] },

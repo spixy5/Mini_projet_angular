@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="stats-musees">
+  <h2>Statistiques des musées</h2>
+  <p class="subheading">Vue d'ensemble des visites, billets vendus et commentaires</p>
+
+  <div class="musee-list">
+    @for(museum of museums; track museum.id) {
+      <div class="musee">
+        <div class="header">
+          <img [src]="museum.photo" alt="{{museum.name}}" />
+          <div class="title">
+            <div class="name">{{museum.name}}</div>
+            <div class="location">{{museum.location}}</div>
+          </div>
+           
+       <div class="trend" [class.trend-success]="calculatePerformance(museum) >= 0" [class.trend-warning]="calculatePerformance(museum) < 0 && calculatePerformance(museum) > -50" [class.trend-destructive]="calculatePerformance(museum) <= -50">
+         <i class="bi icon_performance" [class.bi-graph-up-arrow]="calculatePerformance(museum) > 0"[class.bi-graph-down-arrow]="calculatePerformance(museum) < 0"></i>  {{ calculatePerformance(museum) }}%
+      </div>
+
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="icon visits"><i class="bi bi-people"></i></div>
+            <div class="column">
+              <div class="label">Visites</div>
+            <div class="value">{{museum.visits || 0}}</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="icon billets"><i class="bi bi-receipt-cutoff"></i></div>
+            <div class="column">
+              <div class="label">Billets vendus</div>
+            <div class="value">{{museum.tickets?.length}}</div>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="icon commentaires"><i class="bi bi-chat-dots"></i></div>
+            <div class="column">
+              <div class="label">Commentaires</div>
+            <div class="value">{{museum.comments?.length}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<div class="stats-user">
+    <h2>Statistiques des musées</h2>
+  <p class="subheading">Vue d'ensemble des visites, billets vendus et commentaires</p>
+    <div class="user-list">
+@for ( user of users; track user.id) {
+  <div class="admin-preview">
+    <h3 class="admin-preview__title">Aperçu administrateur — Utilisateur</h3>
+    <div class="admin-preview__user">
+      <div class="user-icon" aria-hidden="true"><i class="bi bi-person"></i></div>
+      <div class="user-info">
+        <div class="user-name">{{ user.name }}</div>
+        <div class="user-email">{{ user.email }}</div>
+      </div>
+      <div class="user-status">
+        <span class="status-indicator" [class.active]="isActive(user.last_login)" [class.inactif]="!isActive(user.last_login)"></span>
+       <span class="status-text" [class.active]="isActive(user.last_login)" [class.inactive]="!isActive(user.last_login)">
+        {{ isActive(user.last_login) ? 'Actif' : 'Inactif' }}
+      </span>
+      </div>
+    </div>
+
+    <div class="admin-preview__stats">
+      <div class="stat-block">
+        <div class="stat-label">Actions totales</div>
+
+  <i class="bi bi-graph-up"></i> 
+       {{ user.activity_count }}
+  
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Dernière connexion</div>
+        <div class="stat-value">
+     
+        <i class="bi bi-clock-history"></i>
+         {{ user.last_login ? (user.last_login | date:'dd MMM yyyy') : 'Aucune' }}
+  
+         </div>
+      </div>
+    </div>
+
+    <div class="admin-preview__flags">
+      <div class="flag-block">
+        <div><i class="bi bi-slash-circle"></i> </div>
+        <div class="flag-label">Suspensions</div>
+        <div class="flag-value" [class.flag-value--success]="user.suspension==0" [class.flag-value--between]="user.suspension >= 1 && user.suspension <= 2" [class.flag-value--failure]="user.suspension==3">
+          {{ user.suspension==0 ? 'Aucune' : user.suspension }}
+        </div>
+      </div>
+      <div class="flag-block">
+        <div><i class="bi bi-person-x"></i></div>
+        <div class="flag-label">Banni</div>
+        <div class="flag-value" [class.flag-value--success]="user.banned==0" [class.flag-value--failure]="user.banned==1">
+          {{ user.banned== 0 ? 'Non' : 'Oui' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-preview__footer">
+      Profil conforme aux standards — tableau de bord moderne.
+    </div>
+  </div>
+}
+</div> 
+</div>
+</div>

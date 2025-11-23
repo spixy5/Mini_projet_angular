@@ -1,0 +1,94 @@
+.user-management {
+  background: #fbfcfe;
+  border: 1px solid #e7edf6;
+  border-radius: 12px;
+  padding: 24px 32px;
+  color: #0b1220;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 80%;
+  margin-top: 50px;
+  margin-left: 200px;
+  box-sizing: border-box;
+}
+
+.user-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.user-header h2 {
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0;
+  color: #0b1220;
+}
+
+.user-subtitle {
+  font-weight: 400;
+  font-size: 14px;
+  color: #8ea0b3;
+  margin: 0;
+}
+
+.user-list-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #8ea0b3;
+  font-size: 14px;
+}
+
+.user-header-title {
+  display: inline-block;
+}
+
+.user-column {
+  flex: 1;
+}
+
+.actions-column {
+  width: 250px;
+  text-align: right;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.empty-state {  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 0;
+  color: #8ea0b3;
+  font-size: 14px;
+  text-align: center;
+}
+
+.empty-state .bi {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.user-footer {
+  font-size: 13px;
+  color: #8ea0b3;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  user-select: none;
+}
+.bi-person-circle{
+    font-size: 30px;
+}

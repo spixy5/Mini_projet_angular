@@ -357,3 +357,59 @@ button.btn-itinerary:hover {
   border: transparent;
   color: white;
 }
+/* weather */
+.weather-widget {
+  background: #ffffff;
+  border: 1px solid #e7edf6;
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 24px;
+  box-shadow: 0 2px 8px rgba(11, 18, 32, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #0b1220;
+}
+
+.weather-widget h5 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.weather-current {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weather-current .temp {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.weather-current .desc {
+  font-size: 16px;
+  color: #8ea0b3;
+}
+
+.weather-hourly {
+  margin-top: 16px;
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.hour-block {
+  flex: 0 0 auto;
+  text-align: center;
+  width: 60px;
+}
+
+.hour-block div:first-child {
+  font-size: 14px;
+  color: #274155;
+}
+
+.hour-block div:last-child {
+  font-size: 16px;
+  font-weight: 600;
+}

@@ -10,7 +10,8 @@ import { PromoCode } from '../models/promo-code';
 })
 export class ServiceMuseum {
     private http: HttpClient=inject(HttpClient);
-    private URL='http://localhost/www/Mini_prj/mini_prj_angular/API'
+    private URL='http://localhost/www/Mini_prj/mini_prj_angular/API';
+    private apiKey = 'logfjk7s8jjz3txed7ixvnknuhhd1h1201inorqv';
   getAllMuseums(): Observable<Museum[]> {
     return this.http.get<Museum[]>(`${this.URL}/get_all_museums.php`);
   }
@@ -50,5 +51,8 @@ markPromoCodeAsUsed(code: string): Observable<any> {
 toggleLike(userId: number, commentId: number): Observable<any> {
   return this.http.post<any>(`${this.URL}/toggle_like.php`, {user_id: userId,comment_id: commentId});
 }
+getWeather(region: string): Observable<any> {
+    return this.http.get<any>(`${this.URL}/weather.php?region=${encodeURIComponent(region)}`);
+  }
 
 }

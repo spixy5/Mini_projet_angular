@@ -1,0 +1,28 @@
+<div class="museum-card">
+  <div class="museum-image">
+    <img [src]="museum.photo" [alt]="museum.name" />
+  </div>
+
+  <div class="museum-content">
+    <h3 class="museum-name">
+      {{ museum.name }}
+      <span class="status" [class]="museum.is_open == 1 ? 'open' : 'closed'">
+        {{ museum.is_open == 1 ? 'Ouvert' : 'Fermé' }}
+      </span>
+    </h3>
+
+    <p class="museum-category">
+        <i class="bi bi-brush"></i> {{museum.category}}•{{ museum.location }}
+    </p>
+
+    <div class="museum-meta">
+      <span class="location">
+        <i class="bi bi-geo-alt"></i> {{ museum.location }}
+      </span>
+
+      <button class="details-btn" type="button" [routerLink]="['/museum', museum.id]">
+        <i class="bi bi-eye"></i> Voir Détails
+      </button>
+    </div>
+  </div>
+</div>

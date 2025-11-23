@@ -13,9 +13,11 @@
             <div class="location">{{museum.location}}</div>
           </div>
            
-       <div class="trend" [class.trend-success]="calculatePerformance(museum) >= 0" [class.trend-warning]="calculatePerformance(museum) < 0 && calculatePerformance(museum) > -50" [class.trend-destructive]="calculatePerformance(museum) <= -50">
+      @if(museum.is_open==1){
+         <div class="trend" [class.trend-success]="calculatePerformance(museum) >= 0" [class.trend-warning]="calculatePerformance(museum) < 0 && calculatePerformance(museum) > -50" [class.trend-destructive]="calculatePerformance(museum) <= -50">
          <i class="bi icon_performance" [class.bi-graph-up-arrow]="calculatePerformance(museum) > 0"[class.bi-graph-down-arrow]="calculatePerformance(museum) < 0"></i>  {{ calculatePerformance(museum) }}%
       </div>
+      }
 
         </div>
         <div class="stats">

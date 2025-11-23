@@ -52,23 +52,17 @@
         <option value="1">Ouvert</option>
         <option value="0">Fermé</option>
       </select>
-      @if(museumForm.get('is_open')?.touched && museumForm.get('is_open')?.invalid){
-        <div class="error-message">Ce champ est obligatoire.</div>
-      }
     </div>
 
     <div class="form-group">
       <label>Catégorie</label>
-      <select formControlName="category">
-        <option value="Archaeological">Archéologique</option>
-        <option value="Ethnographic">Ethnographique</option>
-        <option value="Islamic Art">Art islamique</option>
-        <option value="Traditional Arts">Arts traditionnels</option>
-        <option value="Modern Art">Art moderne</option>
+          <select formControlName="category">
+        <option value="Archéologique">Archéologique</option>
+        <option value="Ethnographique">Ethnographique</option>
+        <option value="Art islamique">Art islamique</option>
+        <option value="Arts traditionnels">Arts traditionnels</option>
+        <option value="Art moderne">Art moderne</option>
       </select>
-      @if(museumForm.get('category')?.touched && museumForm.get('category')?.invalid){
-        <div class="error-message">La catégorie est obligatoire.</div>
-      }
     </div>
   </div>
 
@@ -122,7 +116,7 @@
 
   <div class="actions">
     <button type="button" class="btn cancel" (click)="onReset()">Annuler</button>
-    <button type="submit" class="btn add-museum" [disabled]="museumForm.invalid">
+    <button type="submit" class="btn add-museum" >
       <span class="plus-icon">+</span> Ajouter le musée
     </button>
   </div>

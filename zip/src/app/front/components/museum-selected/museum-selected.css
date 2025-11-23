@@ -1,0 +1,359 @@
+.selected-museum-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #0b1220;
+  padding: 2.5rem 1.5rem;
+  background: #fbfcfe;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.museum-detail-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e7edf6;
+  padding: 40px 48px;
+  box-shadow: none;
+}
+
+.museum-header {
+  background: #f6f9fb;
+  border-radius: 12px;
+  padding: 16px 24px;
+  color: #0b1220;
+}
+
+.museum-header h2 {
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin: 0 0 4px 0;
+}
+
+.museum-subtitle-header {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #8ea0b3;
+  margin: 0;
+}
+
+.btn-back {
+  background: #f6f9fb;
+  border: 1px solid #e7edf6;
+  color: #274155;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #e7edf6;
+}
+
+
+
+.museum-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 24px;
+}
+
+.left-container {
+  flex: 0 0 65%; 
+  display: flex;
+  gap: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.08);
+  border: 1px solid #e7edf6;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.museum-img-wrapper {
+  width: 350px;
+  height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgb(11 18 32 / 0.12);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.museum-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+.gallery-label {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(11,18,32,0.65);
+  color: #ffffff;
+  font-size: 0.75rem;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.museum-name {
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #0b1220;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.museum-subtitle {
+  font-size: 1rem;
+  color: #3579b0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+
+.museum-subtitle b {
+  font-weight: 700;
+  color: #0b1220;
+}
+
+.museum-subtitle .category {
+  font-weight: 400;
+  color: #8ea0b3;
+  margin-left: 6px;
+}
+
+.museum-description {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #274155;
+  margin: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.museum-created {
+  font-size: 0.875rem;
+  color: #8ea0b3;
+  font-weight: 400;
+  margin-top: 12px;
+  user-select: none;
+}
+
+.museum-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+
+button.btn-buy-ticket {
+  background-color: #3579b0;
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(53 121 176 / 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-buy-ticket i {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+button.btn-buy-ticket:hover {
+  background-color: #2a5d85;
+}
+
+.museum-meta {
+  flex: 0 0 35%; 
+  background: #f6f9fb;
+  border-radius: 12px;
+  border: 1px solid #e7edf6;
+  padding: 28px 32px;
+  box-shadow: inset 0 0 8px rgb(255 255 255 / 0.6);
+  font-size: 1rem;
+  color: #274155;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  user-select: none;
+  min-width: 250px; 
+}
+
+.museum-meta h5 {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #0b1220;
+  margin: 0 0 12px 0;
+  user-select: text;
+}
+
+.meta-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  line-height: 1.3;
+  color: #274155;
+}
+
+.meta-item label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #274155;
+  min-width: 120px;
+  flex-shrink: 0;
+  user-select: text;
+}
+
+.meta-item label i {
+  color: #3579b0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.meta-item p {
+  margin: 0;
+  font-weight: 600;
+  color: #0b1220;
+  flex: 1 1 auto;
+  user-select: text;
+}
+
+.meta-info-box {
+  background: #e7f0f9;
+  border-radius: 8px;
+  padding: 18px 22px;
+  color: #274155;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #c7d9ed;
+  margin-top: 8px;
+  user-select: none;
+}
+
+.meta-info-box div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meta-info-box div i {
+  font-size: 1rem;
+  color: #3579b0;
+  flex-shrink: 0;
+}
+
+.meta-info-box div span {
+  user-select: text;
+}
+
+.meta-tip {
+  font-size: 0.875rem;
+  color: #8ea0b3;
+  background: #f6f9fb;
+  border-radius: 8px;
+  padding: 14px 18px;
+  border: 1px solid #e7edf6;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.meta-tip i {
+  color: #3579b0;
+  font-size: 1.1rem;
+}
+
+.comments-section {
+  margin-top: 3.5rem;
+  font-size: 1rem;
+}
+
+.comments-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #0b1220;
+  border-bottom: 3px solid #3579b0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comments-count {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #3579b0;
+  background: #e7f0f9;
+  border-radius: 12px;
+  padding: 2px 10px;
+  user-select: none;
+}
+
+.comments-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+button.btn-itinerary {
+  background-color: transparent;
+  border: 2px solid #3579b0;
+  color: #3579b0;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+button.btn-itinerary:hover {
+  background-color: #3b82f6;
+  border: transparent;
+  color: white;
+}

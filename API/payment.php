@@ -14,6 +14,7 @@ $numberOfTickets = $data['numberOfTickets'] ?? null;
 $visitDate = $data['visitDate'] ?? null;
 $ticketType = $data['ticketType'] ?? null;
 $promoCode = $data['promoCode'] ?? null;
+$specialRequests = $data['specialRequests'] ?? null;
 if (empty($user_id) || empty($user_email) || empty($museum_id) || empty($museumName) || empty($totalAmount) || empty($numberOfTickets) || empty($visitDate) || empty($ticketType)) {
     echo json_encode([
         "success" => false,
@@ -23,9 +24,9 @@ if (empty($user_id) || empty($user_email) || empty($museum_id) || empty($museumN
 }
 
 $sql = "INSERT INTO tickets 
-        (user_id, museum_id, museum_name, user_email, totalAmount, numberOfTickets, visit_date, ticket_type, promo_code)
+        (user_id, museum_id, museum_name, user_email, totalAmount, numberOfTickets, visit_date, ticket_type, promo_code, special_requests)
         VALUES
-        ('$user_id', '$museum_id', '$museumName', '$user_email', '$totalAmount', '$numberOfTickets', '$visitDate', '$ticketType', '$promoCode')";
+        ('$user_id', '$museum_id', '$museumName', '$user_email', '$totalAmount', '$numberOfTickets', '$visitDate', '$ticketType', '$promoCode' ,'$specialRequests')";
 
 if (mysqli_query($conn, $sql)) {
 

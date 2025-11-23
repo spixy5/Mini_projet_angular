@@ -1,0 +1,28 @@
+<div class="user-management">
+  <header class="user-header">
+    <h2>Gérer les utilisateurs</h2>
+    <p class="user-subtitle">Administration des utilisateurs — Suspendez ou bannissez des comptes.</p>
+  </header>
+
+  <div class="user-list-header">
+    <span class="user-header-title user-column">Utilisateur</span>
+    <span class="user-header-title actions-column">Actions</span>
+  </div>
+
+  <ul class="user-list">
+    @for (user of users; track user.id) {
+           <app-admin-user-item [user]="user" (suspended)="onUserSuspended($event)" (banned)="onUserBanned($event)"></app-admin-user-item>
+        }
+    
+    @empty {
+    <li class="empty-state">
+      <i class="bi bi-person-x"></i>
+      <p>Aucun utilisateur trouvé</p>
+    </li>
+    }
+  </ul>
+
+  <footer class="user-footer">
+    Affichage de {{userLength()}} utilisateurs
+  </footer>
+</div>

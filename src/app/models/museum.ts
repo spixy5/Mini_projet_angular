@@ -10,7 +10,7 @@ export interface Museum {
   visits?: number;
   location: string;
   created_at: Date;
-  category: 'Archaeological' | 'Ethnographic' | 'Islamic Art' | 'Traditional Arts' | 'Modern Art';
+  category: 'Archéologique' | 'Ethnographique' | 'Art islamique' | 'Arts traditionnels' | 'Art moderne';
   opening_hour: Date; 
   closing_hour: Date; 
   comments?: Comment[];

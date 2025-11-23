@@ -1,0 +1,248 @@
+<div class="payment-component">
+  <h2>Paiement des billets</h2>
+  <p class="subtitle">
+    Réservez vos billets pour les musées de Tunisie en quelques étapes simples et sécurisées.
+  </p>
+  <div class="main-content">
+    <form class="visit-details-form" [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+      <fieldset class="visit-details" formGroupName="visitDetails">
+        <legend>Détails de la visite</legend>
+        <p class="visit-instruction">
+          Choisissez le musée, la date et le type de billet.
+        </p>
+
+                    <div class="form-row museum-name" class="form-row">
+                <label for="museum">Musée</label>
+                <div id="museum"  aria-label="Musée sélectionné" class="input-group">
+                 @if(museum){
+                   {{ museum.name }}
+                 }
+                </div>
+              </div>
+
+        <div class="form-row date-time">
+          <div class="input-group">
+            <label for="visit-date">Date de visite</label>
+            <input type="date" id="visit-date" name="visitDate" formControlName="visitDate" placeholder="Choisir une date" />
+          </div>
+          
+       @if( paymentForm.get('visitDetails.visitDate')?.touched && paymentForm.get('visitDetails.visitDate')?.errors?.['required'])
+       { <div class="error-message">La date est obligatoire.</div>}
+        @else if(paymentForm.get('visitDetails.visitDate')?.touched && paymentForm.get('visitDetails.visitDate')?.errors?.['pastDate'])
+       {<div class="error-message">Veuillez choisir une date future.</div>}
+
+          <div class="input-group">
+            <label for="time-slot">Créneau horaire</label>
+            <select id="time-slot" name="timeSlot" formControlName="timeSlot" aria-label="Sélectionner un créneau horaire">
+                @for (slot of timeSlots; track $index) {
+                <option [value]="slot">{{slot}}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row ticket-type">
+          <label>Type de billet</label>
+     <div class="ticket-buttons" role="group" aria-label="Type de billet">
+  <button type="button" class="btn-type" [class.active]="paymentForm.get('visitDetails')?.get('ticketType')?.value=='adult'" (click)="selectTicketType('adult')">Adulte</button>
+  <button type="button" class="btn-type" [class.active]="paymentForm.get('visitDetails')?.get('ticketType')?.value=='student'" (click)="selectTicketType('student')">Étudiant</button>
+  <button type="button" class="btn-type" [class.active]="paymentForm.get('visitDetails')?.get('ticketType')?.value=='child'" (click)="selectTicketType('child')">Enfant</button>
+  <button type="button" class="btn-type" [class.active]="paymentForm.get('visitDetails')?.get('ticketType')?.value=='group'" (click)="selectTicketType('group')">Groupe(5)</button>
+</div>
+
+          <span class="tarif-info">Tarif réduit disponible</span>
+        </div>
+
+        <div class="form-column quantity-promo">
+          <div class="input-group quantity-input">
+            <label for="ticket-count">Nombre de billets</label>
+            <input id="ticket-count" name="ticketCount" type="number" min="1" formControlName="ticketCount" aria-label="Nombre de billets" (change)="calculateTotalAmount()"/>
+          </div>
+        
+          <div class="input-group promo-code">
+            <label for="promo-code">Code promo</label>
+            <input id="promo-code" name="promoCode" type="text" placeholder="Saisir un code" formControlName="promoCode" aria-label="Code promo optionnel"/>
+          </div>
+      
+        </div>
+        <div class="form-column quantity-promo">
+            @if(paymentForm.get('visitDetails.ticketCount')?.touched && paymentForm.get('visitDetails.ticketCount')?.errors?.['min'])
+            { <div class="error-message input-group quantity-input">Le nombre doit être supérieur à 0.</div> }
+                @if(paymentForm.get('visitDetails.promoCode')?.touched && paymentForm.get('visitDetails.promoCode')?.errors?.['invalidPromo'])
+        { <div class="error-message input-group promo-code">Code promo invalide.</div> }
+        </div>
+      </fieldset>
+      <fieldset class="payment-info">
+        <legend>Informations de paiement</legend>
+        <p class="payment-info-subtext">
+          Vos informations sont chiffrées et sécurisées.
+          <span class="cards-icons" aria-label="Cartes de paiement acceptées">Visa Mastercard Carte locale</span>
+        </p>
+
+        <div class="form-row cardholder-name">
+          <label for="card-name">Nom sur la carte</label>
+     <input type="text" id="card-name" name="cardName" placeholder="Nom complet" formControlName="cardName" aria-label="Nom sur la carte" />
+        </div>
+        @if(paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.errors?.['required'])
+        { <div class="error-message">Le nom est obligatoire.</div> }
+        @else if(paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.errors?.['minlength'])
+        { <div class="error-message">Le nom doit contenir au moins 5 caractères.</div> }
+        @else if(paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.errors?.['pattern'])
+        { <div class="error-message">Le nom doit être en majuscules.</div> }
+
+        <div class="form-row card-number">
+          <label for="card-number">Numéro de carte</label>
+      <input type="text" id="card-number" name="cardNumber" placeholder="1234 1234 1234 1234" formControlName="cardNumber" aria-label="Numéro de carte" inputmode="numeric" autocomplete="cc-number" />
+          <span class="secured-label">Sécurisé</span>
+        </div>
+        @if(paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.errors?.['required'])
+      { <div class="error-message">Le numéro de carte est obligatoire.</div> }
+      @else if(paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.errors?.['pattern'])
+      { <div class="error-message">Le numéro doit contenir 16 chiffres.</div> }
+        <div class="form-row card-exp-cvc">
+          <div class="input-group expiry-date">
+            <label for="expiry-date">Date d'expiration</label>
+        <input type="month" id="expiry-date" name="expiryDate" placeholder="MM / AA" formControlName="expiryDate" aria-label="Date d'expiration" inputmode="numeric" autocomplete="cc-exp" />
+
+          </div>
+          @if(paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors?.['required'])
+              { <div class="error-message">La date d’expiration est obligatoire.</div> }
+              @else if(paymentForm.get('expiryDate')?.touched && paymentForm.get('expiryDate')?.errors?.['pastDate'])
+              { <div class="error-message">Date invalide.</div> }
+
+          <div class="input-group cvc-code">
+            <label for="cvc">CVC</label>
+           <input type="password" id="cvc" name="cvc" placeholder="•••" formControlName="cvc" aria-label="Code CVC" inputmode="numeric" autocomplete="cc-csc" />
+          </div>
+          @if(paymentForm.get('cvc')?.touched && paymentForm.get('cvc')?.errors?.['required'])
+          { <div class="error-message">Le CVC est obligatoire.</div> }
+          @else if(paymentForm.get('cvc')?.touched && paymentForm.get('cvc')?.errors?.['pattern'])
+          { <div class="error-message">CVC invalide (3 chiffres).</div> }
+
+
+        </div>
+
+        <div class="form-row terms-check">
+          <label class="checkbox-label">
+            <input type="checkbox" name="terms" id="terms" formControlName="terms" />
+            J’accepte les <a (click)="toggleConditions()">conditions générales de vente</a>.
+          </label>
+        </div>
+        @if(paymentForm.get('terms')?.touched && paymentForm.get('terms')?.invalid)
+      { <div class="error-message">Vous devez accepter les conditions générales de vente.</div> }
+
+        <button type="submit" class="btn-pay">Payer maintenant</button>
+        <p class="payment-note">
+          En cliquant sur « Payer maintenant », vous autorisez le débit du montant total et recevez vos billets par email.
+        </p>
+      </fieldset>
+    </form>
+
+    <aside class="order-summary">
+      <div class="summary-card">
+        <h3>Récapitulatif de la commande</h3>
+        <p class="summary-instruction">
+          Vérifiez les détails avant de valider le paiement.
+          
+        </p>
+        <dl class="order-details">
+          <div class="order-row">
+            <dt>Musée sélectionné</dt>
+            <dd>{{museum.name}}</dd>
+          </div>
+          <div class="order-row">
+            <dt>Date & heure</dt>
+            <dd>{{ paymentForm.get('visitDetails.visitDate')?.value | date: 'dd MMM' }}, {{ paymentForm.get('visitDetails.timeSlot')?.value | startHour}}</dd>
+          </div>
+          <div class="order-row">
+            
+              @if( paymentForm.get('visitDetails.ticketType')?.value=='adult'){
+                <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × Adulte) </dt>
+              }
+           @if( paymentForm.get('visitDetails.ticketType')?.value=='child'){
+                <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × Enfant) </dt>
+              }
+              @if( paymentForm.get('visitDetails.ticketType')?.value=='student'){
+                <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × Étudiant) </dt>
+              }
+               @if( paymentForm.get('visitDetails.ticketType')?.value=='group'){
+                <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × Groupe(5)) </dt>
+              }
+           @if(museum){
+             <dd>{{totalTicketsAmount | number}}</dd>
+           }
+          </div>
+          <div class="order-row">
+            <dt>Frais de service</dt>
+            <dd>2 DT</dd>
+          </div>
+          @if(promoCodeValide()){
+            <div class="order-row">
+            <dt>Réduction</dt>
+            @if(museum){
+              <dd>-{{reduction(totalAmount) }}DT</dd>
+            }
+          </div>
+          }
+          <div class="order-total">
+            <dt>Total à payer</dt>
+            @if(promoCodeValide()){
+              @if(museum){
+            <dd>{{ totalAmount -reduction(totalAmount) }}</dd>
+          }
+            }
+            @else{
+              @if(museum)
+           { <dd>{{totalAmount}}</dd>}
+          }
+          
+          </div>
+        </dl>
+        <p class="tax-note">
+          Les prix sont indiqués en dinar tunisien (TND). Taxes incluses.
+        </p>
+      </div>
+
+      <div class="security-advice">
+        <h4>Conseils de sécurité</h4>
+        <ul>
+          <li>Ne partagez jamais les informations de votre carte avec d’autres personnes.</li>
+          <li>Assurez-vous que vous êtes sur le site officiel Musées de Tunisie.</li>
+          <li>Utilisez un appareil et un réseau de confiance pour régler vos achats.</li>
+          <li>Les billets sont nominatifs et valables uniquement à la date choisie.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+@if(showConditions){
+  <div class="overlay-conditions" (click)="toggleConditions()"></div>
+}
+
+@if(showConditions){
+  <div class="conditions-modal">
+
+    <div class="conditions-box">
+      <div class="conditions-header">
+        <i class="bi bi-lightbulb-fill conditions-icon"></i>
+        <h3>Conditions générales de vente</h3>
+      </div>
+
+      <ul class="conditions-list">
+        <li>Les billets sont nominatifs et valables uniquement à la date et à l’heure choisies.</li>
+        <li>Chaque billet donne droit à une seule entrée par personne.</li>
+        <li>Le paiement en ligne doit être effectué avant la visite pour confirmer la réservation.</li>
+        <li>Les billets ne sont pas remboursables sauf en cas d’annulation exceptionnelle du musée.</li>
+       <li>Les codes promotionnels sont valables uniquement pour les billets éligibles et ne peuvent être utilisés qu'une seule fois.</li>
+        <li>Les visiteurs doivent respecter le règlement intérieur du musée.</li>
+      </ul>
+
+      <p class="conditions-footer">
+        <i class="bi bi-lightbulb-fill"></i>
+        Astuce : gardez vos informations personnelles et votre billet en sécurité.
+      </p>
+    </div>
+  </div>
+}
+
+

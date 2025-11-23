@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-title">
+      <i class="bi bi-book-half"></i>
+      <span>Artevia</span>
+    </div>
+<div class="nav-links">
+  <a routerLink="admin/users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Gérer les utilisateurs</a>
+  <a routerLink="admin/museums" routerLinkActive="active" class="nav-link">Gérer les musées</a>
+  <a routerLink="admin/statistics" routerLinkActive="active" class="nav-link">Statistiques</a>
+</div>
+
+    <div class="nav-buttons">
+        @if(onRole()){
+         <button class="btn-login" (click)="OnlogOut()">Déconnexion</button>
+      }
+      @else{
+         <button class="btn-login" routerLink="login">Connexion</button>
+      <button class="btn-signup" routerLink="signup">S'inscrire</button>
+      }
+    </div>
+  </div>
+</nav>

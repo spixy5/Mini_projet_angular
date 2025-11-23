@@ -21,11 +21,11 @@ export class AdminAddMuseum implements OnInit{
       photo: ['photos/',Validators.required],
       name: ['', [Validators.required , Validators.minLength(2)]],
       location: ['', [Validators.required , Validators.minLength(2)]],
-      is_open: [1, Validators.required],
+      is_open: [1],
       entry_price: [0, [Validators.required , Validators.min(0.1)]],
       opening_hour:['00:00',Validators.required],
       closing_hour:['00:00',Validators.required],
-      category: ['Archaeological', Validators.required],
+      category: ['Archéologique'],
       created_at: ['', Validators.required],
       description: ['',Validators.required]
     });
@@ -36,17 +36,20 @@ export class AdminAddMuseum implements OnInit{
         this.museumForm.markAllAsTouched();
     }
     else{
-
+      if (this.museumForm.get("created_at")?.value) {
+      const date = new Date(this.museumForm.get("created_at")?.value);
+      this.museumForm.get("created_at")?.setValue(date.toISOString().split('T')[0]); 
+    }
       this.museumService.createMuseum(this.museumForm.value).subscribe(
         data =>{
           if(data.success){
-            console.log(data)
-          alert('Musée ajouté avec succès'); 
+            console.log(data);
+            alert('Musée ajouté avec succès'); 
             const userId = Number(localStorage.getItem('userId'));
               this.userService.updateActivity(userId).subscribe(
                 data=>console.log(data)
               );
-              this.router.navigate(['/admin/museums']);
+               this.router.navigate(['/admin/museums']);
           }
           else{
             alert('erro :'+data.mesage)

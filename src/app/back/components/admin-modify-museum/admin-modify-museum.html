@@ -18,16 +18,33 @@
     <label>Chemin de l'image du musée</label>
     <input type="text" formControlName="photo" />
     <p class="hint">L'admin doit placer manuellement la photo dans le dossier 'photos'.</p>
+    @if(museumForm.get('photo')?.touched && museumForm.get('photo')?.errors?.['required']){
+      <div class="error-message">Le chemin de la photo est obligatoire.</div>
+    }
+  
   </div>
+  
 
   <div class="form-group">
     <label>Nom du musée</label>
     <input type="text" formControlName="name" />
+       @if(museumForm.get('name')?.touched && museumForm.get('name')?.errors?.['required']){
+      <div class="error-message">Le nom est obligatoire.</div>
+    }
+    @else if(museumForm.get('name')?.touched && museumForm.get('name')?.errors?.['minlength']){
+      <div class="error-message">Le nom doit contenir au moins 2 caractères.</div>
+    }
   </div>
 
   <div class="form-group">
     <label>Adresse</label>
     <input type="text" formControlName="location" />
+      @if(museumForm.get('location')?.touched && museumForm.get('location')?.errors?.['required']){
+      <div class="error-message">L’adresse est obligatoire.</div>
+    }
+    @else if(museumForm.get('location')?.touched && museumForm.get('location')?.errors?.['minlength']){
+      <div class="error-message">L’adresse doit contenir au moins 2 caractères.</div>
+    }
   </div>
 
   <div class="row">
@@ -70,6 +87,9 @@
   <div class="form-group">
     <label>Description</label>
     <textarea rows="4" formControlName="description"></textarea>
+      @if(museumForm.get('description')?.touched && museumForm.get('description')?.invalid){
+      <div class="error-message">La description est obligatoire.</div>
+    }
   </div>
 
   <div class="actions">

@@ -2,10 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ServiceMuseum } from '../../../services/service-museum';
 import { Museum } from '../../../models/museum';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { MuseumItem } from '../museum-item/museum-item';
 @Component({
   selector: 'app-museum-list',
-  imports: [FormsModule,RouterLink],
+  imports: [FormsModule,MuseumItem],
   templateUrl: './museum-list.html',
   styleUrl: './museum-list.css',
 })

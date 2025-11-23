@@ -1,0 +1,120 @@
+<div class="user-detail-root">
+      <header class="ud-header">
+    <div class="ud-title">
+      <h1>Détail utilisateur</h1>
+      <p class="ud-id">ID #{{ user?.id }} – Gestion des droits, suspensions et activité</p>
+    </div>
+  </header>
+  <section class="card profile-card">
+    <h2>Profil</h2>
+    <p class="muted">Informations principales de l'utilisateur</p>
+    <div class="profile-row">
+      <i class="bi bi-person-circle profile-icon"></i>
+
+      <div class="profile-text">
+        <p><strong>Nom :</strong> {{ user?.name }}</p>
+        <p><strong>Email :</strong> {{ user?.email }}</p>
+        <p><strong>ID :</strong> {{ user?.id }}</p>
+        <div class="badges-wrap">
+          <span class="badge badge-primary">
+            <i class="bi bi-person-fill"></i> Rôle : {{ user?.role }}
+          </span>
+
+          <span 
+            class="badge" [class.badge-success]="user?.banned==0" [class.badge-danger]="user?.banned==1">
+            <i class="bi" [class.bi-check-circle]="user?.banned==0" [class.bi-x-circle]="user?.banned==1"></i> 
+            {{ user?.banned==1 ? 'Banni' : 'Non Banni' }}
+          </span>
+
+          <span class="badge badge-warning">
+            <i class="bi bi-exclamation-circle"></i> Suspensions : {{ user?.suspension }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="two-col">
+    <section class="card status-card">
+      <h3>Statut & restrictions</h3>
+      <p class="muted">Basé sur suspension et banned</p>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <label>Suspensions totales</label>
+          <div class="stat-input">{{ user?.suspension }}</div>
+        </div>
+        <div class="stat">
+          <label>Banni</label>
+          <div class="stat-input">
+            {{ user?.banned==1 ? 'Oui' : 'Non' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="status-buttons">
+       @if(user){
+         <button class="btn" [class.btn-success-outline]="user.banned==0 && user.suspension==0" [class.btn-danger-outline]="user.banned > 0" [class.btn-warning-outline]="user.banned==0 && user.suspension > 0">
+            <i class="bi bi-shield-check"></i>
+  {{ user.banned > 0 ? 'Compte restreint (banni: ' + user.banned + ')' : (user.suspension > 0 ? 'Compte limité (suspensions: ' + user.suspension + ')' : 'Compte sain') }}
+</button>
+       }
+
+      </div>
+    </section>
+
+    <section class="card activity-card">
+      <h3>Activité récente</h3>
+      <p class="muted">Jours depuis la dernière connexion</p>
+
+      <div class="activity-items">
+        <div class="activity-box">
+          <i class="bi bi-cursor-fill activity-ico" aria-hidden="true"></i>
+          Actions effectuées : {{ user?.activity_count }}
+        </div>
+        <div class="activity-box">
+            
+          <i class="bi bi-calendar-event activity-ico"></i>
+          Dernière connexion : {{ user?.last_login | date:'shortDate' }}
+        </div>
+        <div class="activity-box">
+          <i class="bi bi-clock-history activity-ico"></i>
+          {{ getDaysSinceLastLogin() }} jour(s) depuis la dernière connexion
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="user-comments">
+  <header>
+    <h2>Commentaires de l'utilisateur</h2>
+    <p class="subtitle">Historique des avis laissés sur les musées</p>
+  </header>
+
+  <section class="comments-list">
+    @for ( comment of comments ; track comment.id) {
+      @if (comment) {
+        <article class="comment">
+          <header>
+            <strong>{{comment?.author_email}}</strong>
+            <small>Commentaire #{{comment?.id }}</small>
+            <p>{{comment?.message}}</p>
+          </header>
+          <button class="btn-destructive" type="button" (click)="onDeleteComment(comment?.id)">
+            <svg aria-hidden="true" focusable="false" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M5.5 5.5l5 5m0-5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Supprimer
+          </button>
+        </article>
+      }
+    }
+    @empty {
+      <article class="empty-state">
+        <i class="bi bi-person-x"></i>
+        <p>Aucun commentaire trouvé</p>
+      </article>
+    }
+  </section>
+</div>
+
+

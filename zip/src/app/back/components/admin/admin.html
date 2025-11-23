@@ -1,0 +1,49 @@
+<div class="admin-access-card">
+  <header class="admin-access-header">
+    <svg class="icon-shield" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2L3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-3z"></path>
+      <path d="M9.5 11.5l3 3 4-4"></path>
+    </svg>
+    <h2>Accès Administrateur</h2>
+  </header>
+  <p class="admin-access-desc">Connectez-vous avec vos identifiants administrateur pour gérer les musées et le contenu.</p>
+
+  <form class="admin-access-form" autocomplete="off" [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+    <label for="username">Nom d'utilisateur</label>
+    <div class="input-wrapper">
+      <svg class="input-icon" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M4 21v-2a4 4 0 0 1 3-3.87"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <input id="username" name="username" type="text" placeholder="Entrez votre nom d'utilisateur" formControlName="username" />
+    </div>
+
+    <label for="password">Mot de passe</label>
+    <div class="input-wrapper">
+      <svg class="input-icon" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <input id="password" name="password" type="password" placeholder="Entrez votre mot de passe" formControlName="password" />
+    </div>
+
+    <div class="form-footer">
+      <a (click)="updatePassword()" class="forgot-password-link">Mot de passe oublié ?</a>
+      <button type="submit" class="sign-in-btn">Se connecter</button>
+    </div>
+  </form>
+
+  <hr class="separator"/>
+
+  <div class="admin-access-footer-note">
+    <svg class="footer-icon-info" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="16" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    </svg>
+    <span>Réservé au personnel autorisé</span>
+  </div>
+
+  <p class="footer-desc">Problèmes de connexion ? Contactez votre administrateur.</p>
+</div>

@@ -84,13 +84,13 @@
     </section>
   </div>
 </div>
+<div class="comment_ticket">
 <div class="user-comments">
   <header>
     <h2>Commentaires de l'utilisateur</h2>
     <p class="subtitle">Historique des avis laissés sur les musées</p>
   </header>
-
-  <section class="comments-list">
+    <section class="comments-list">
     @for ( comment of comments ; track comment.id) {
       @if (comment) {
         <article class="comment">
@@ -115,6 +115,42 @@
       </article>
     }
   </section>
+</div>
+<div class="user-tickets">
+  <header>
+    <h2>Billets achetés</h2>
+    <p class="subtitle">Historique des achats par cet utilisateur</p>
+  </header>
+
+ <section class="tickets-list">
+    @for (ticket of tickets;track ticket.id) {
+      @if (ticket) {
+        <article class="ticket">
+          <header>
+            <strong>{{ticket?.museum_name}}</strong>
+            <small>Visite prévue le {{ticket?.visit_date | date :"dd MMMM yyyy"}} .Réservation #{{ticket?.id}}</small>
+            @if(ticket?.promo_code){
+              <p>Total : {{ticket?.totalAmount}} DT | Email: {{ticket.user_email}} | Promo :{{ticket?.promo_code}}</p>
+            }
+            @else{
+              <p>Total : {{ticket?.totalAmount}} DT | Email: {{ticket.user_email}}</p>
+            }
+          </header>
+            <button class="btn-type" type="button">
+             {{ticket?.ticket_type}} : {{ticket?. numberOfTickets}} billets
+          </button>
+        </article>
+      }
+    }
+    @empty {
+      <article class="empty-state">
+        <i class="bi bi-ticket-perforated"></i>
+        <p>Aucun ticket trouvé</p>
+      </article>
+    }
+</section>
+</div>
+
 </div>
 
 

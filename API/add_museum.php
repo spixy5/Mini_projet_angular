@@ -15,7 +15,7 @@ if (
     $sql = "INSERT INTO museums 
         (name, photo, description, is_open, entry_price, location, created_at, category, opening_hour, closing_hour)
         VALUES 
-        ('{$data['name']}', '{$data['photo']}', '{$data['description']}', {$data['is_open']}, {$data['entry_price']}, '{$data['location']}',{$data['created_at']}, '{$data['category']}', '{$data['opening_hour']}', '{$data['closing_hour']}')";
+        ('{$data['name']}', '{$data['photo']}', '{$data['description']}', {$data['is_open']}, {$data['entry_price']}, '{$data['location']}','{$data['created_at']}', '{$data['category']}', '{$data['opening_hour']}', '{$data['closing_hour']}')";
 
     if (mysqli_query($conn, $sql)) {
         echo json_encode([

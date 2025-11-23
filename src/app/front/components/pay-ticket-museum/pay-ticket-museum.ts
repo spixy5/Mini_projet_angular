@@ -1,16 +1,16 @@
   import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-  import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+  import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
   import { Museum } from '../../../models/museum';
-  import { ActivatedRoute } from '@angular/router';
+  import { ActivatedRoute, Router } from '@angular/router';
   import { ServiceMuseum } from '../../../services/service-museum';
-  import { DatePipe } from '@angular/common';
+  import { DatePipe, DecimalPipe } from '@angular/common';
   import { StartHourPipe } from '../../../pipe/start-hour-pipe';
   import { PromoCode } from '../../../models/promo-code';
   import { ServiceUser } from '../../../services/service-user';
 
   @Component({
     selector: 'app-pay-ticket-museum',
-    imports: [ReactiveFormsModule,DatePipe,StartHourPipe],
+    imports: [ReactiveFormsModule,DatePipe,StartHourPipe,DecimalPipe],
     templateUrl: './pay-ticket-museum.html',
     styleUrl: './pay-ticket-museum.css',
   })
@@ -20,6 +20,7 @@
   private museumService:ServiceMuseum=inject(ServiceMuseum);
   private cd: ChangeDetectorRef=inject(ChangeDetectorRef);
   private userService:ServiceUser=inject(ServiceUser);
+  private router:Router=inject(Router);
   paymentForm!: FormGroup;
   museum!:Museum;
   totalAmount: number=0;
@@ -34,9 +35,11 @@
         timeSlot: ['', Validators.required],
         ticketType: ['adult', Validators.required],
         ticketCount: [1, [Validators.required, Validators.min(1)]],
-        promoCode: ['', [this.promoCodeValidator.bind(this)]]
+        promoCode: ['', [this.promoCodeValidator.bind(this)]],
+        specialRequests:  this.fb.array([]),
+
       }),
-      cardName: ['', [Validators.required, Validators.minLength(5), Validators.pattern('^[A-Z ]+$')]],
+      cardName: ['', [Validators.required, Validators.minLength(5), Validators.pattern('^[A-Z ]+( [A-Z]+)+$')]],
       cardNumber: ['', [Validators.required, Validators.pattern('\\d{16}')]],
       expiryDate: ['', [Validators.required,, this.DateValid()]],
       cvc: ['', [Validators.required, Validators.pattern('\\d{3}')]],
@@ -53,12 +56,17 @@
     const museumId = Number(this.route.snapshot.paramMap.get('id'));
     this.museumService.getMuseumById(museumId).subscribe(data => {
       this.museum = data;
-      this.totalAmount= this.museum ? this.museum.entry_price : 0;
+      this.totalAmount=this.museum.entry_price;
+       this.totalTicketsAmount=this.museum.entry_price;
       this.generateTimeSlots();
       this.paymentForm.get('visitDetails')?.patchValue({
         timeSlot: this.timeSlots.length > 0 ? this.timeSlots[0] : ''
+
       });
+       
     });
+    
+  
   }
 
 
@@ -137,6 +145,19 @@ calculateTotalAmount() {
   toggleConditions(){
     this.showConditions=!this.showConditions;
   }
+get specialRequests(): FormArray {
+  return this.paymentForm.get('visitDetails.specialRequests') as FormArray;
+}
+
+addSpecialRequest() {
+  if (this.specialRequests.length < 5) {
+    this.specialRequests.push(this.fb.control('',[Validators.required , Validators.minLength(2)]));
+  }
+}
+
+removeSpecialRequest(index: number) {
+  this.specialRequests.removeAt(index);
+}
 
   onSubmit() {
   if (this.paymentForm.invalid) {
@@ -154,16 +175,18 @@ calculateTotalAmount() {
     museumName: this.museum.name,
   totalAmount: this.totalAmount,
     numberOfTickets: visitDetails.ticketCount,
-    visitDate: visitDetails.visitDate,
+    visitDate: `${visitDetails.visitDate}T${visitDetails.timeSlot.split('-')[0]}:00`,
     ticketType: visitDetails.ticketType,
-    promoCode: visitDetails.promoCode || null
+    promoCode: visitDetails.promoCode || null,
+     specialRequests: visitDetails.specialRequests.length > 0 ? visitDetails.specialRequests.join(', ') : null
   };
+ 
 
   this.museumService.sendTicketPayment(ticketData).subscribe(
     data => {
       if (data.success) {
         alert('Paiement réussi ! Un email vous a été envoyé.');
-        console.log(data);
+        this.router.navigate(['/museum'])
           const userId = Number(localStorage.getItem('userId'));
         this.userService.updateActivity(userId).subscribe(
           data=>console.log(data)

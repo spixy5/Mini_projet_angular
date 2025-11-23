@@ -39,11 +39,14 @@ export class ServiceUser {
 banUser(id: number): Observable<any> {
   return this.http.post<any>(`${this.URL}/ban_user.php`,{id});
 }
-  getAllComments(userEmail: string): Observable<any> {
+  getCommentsByUser(userEmail: string): Observable<any> {
     return this.http.get<any>(`${this.URL}/get_comments_user.php?userEmail=${userEmail}`);
   }
   deleteCommentUser(id: number): Observable<any> {
       return this.http.get<Comment>(`${this.URL}/delete_comment_user.php?id=${id}`);
+  }
+  getTicketsByUser(userEmail: string): Observable<any> {
+    return this.http.get<any>(`${this.URL}/get_ticket_by_user.php?userEmail=${userEmail}`);
   }
 }
 

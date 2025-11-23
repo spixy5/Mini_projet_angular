@@ -1,0 +1,38 @@
+<div class="museum-management">
+  <header class="museum-header">
+    <h2>Gérer les musées</h2>
+    <p class="museum-subtitle">Administration des musées de Tunisie — Ajoutez, consultez ou modifiez les fiches.</p>
+    <button class="btn btn-primary add-museum-btn" type="button" [routerLink]="['/admin/add-museum']">
+      <span class="btn-icon">+</span> Ajouter un musée
+    </button>
+  </header>
+  <section class="museum-tip" role="note">
+    <span class="tip-icon">●</span>
+    <p>Astuce: utilisez la recherche pour retrouver rapidement un musée.</p>
+    <div class="filters-section">
+      <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" placeholder="Rechercher un musée..." [(ngModel)]="searchTerm" (ngModelChange)="filterByName()">
+      </div>
+    </div>
+  </section>
+  <div class="museum-list-header">
+    <span class="museum-header-title museum-column">Musée</span>
+    <span class="museum-header-title actions-column">Actions</span>
+  </div>
+  <ul class="museum-list">
+    @for (museum of museums; track museum.id) {
+        <app-admin-museum-item [museum]="museum" (museumDeleted)="onMuseumDeleted($event)"></app-admin-museum-item>
+    }
+    @empty {
+    <li class="empty-state">
+      <i class="bi bi-building-x"></i>
+      <p>Aucun musée trouvé</p>
+    </li>
+    }
+  </ul>
+
+  <footer class="museum-footer">
+    Affichage de {{museumsLength()}} musées — utilisez <button class="btn btn-primary-inline" type="button">+ Ajouter un musée</button> pour créer une nouvelle fiche.
+  </footer>
+</div>

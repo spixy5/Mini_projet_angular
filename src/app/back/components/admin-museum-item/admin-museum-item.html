@@ -1,0 +1,21 @@
+<li class="museum-list-item">
+          <div class="museum-image">
+    <img [src]="museum.photo">
+  </div>
+      <div class="museum-info">
+       <p class="museum-category"> <i class="bi bi-brush"></i> {{museum.category}} </p>
+        <p class="museum-name">{{ museum.name }}, {{ museum.location }}</p>
+                </div>
+            <div class="museum-actions">
+            <button class="btn btn-success" type="button" [routerLink]="['/admin/museum', museum.id, 'modify']">
+                <i class="bi bi-pencil"></i> Modifier
+            </button>
+            <button class="btn btn-accent" type="button" [routerLink]="['/museum', museum.id]">
+                <i class="bi bi-eye"></i> Voir
+            </button>
+            <button class="btn btn-destructive" type="button" (click)="deleteMuseum(museum.id ?? -1)">
+                <i class="bi bi-trash"></i> Supprimer
+            </button>
+            </div>
+
+    </li>

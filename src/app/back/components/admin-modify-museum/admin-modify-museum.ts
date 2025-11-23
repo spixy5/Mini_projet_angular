@@ -16,7 +16,7 @@ export class AdminModifyMuseum {
    museumForm!: FormGroup;
   readonly fb: FormBuilder=inject(FormBuilder);
   readonly museumService :ServiceMuseum=inject(ServiceMuseum)
-  readonly route = inject(ActivatedRoute);
+ readonly route = inject(ActivatedRoute);
  readonly router: Router=inject(Router);
  readonly userService:ServiceUser=inject(ServiceUser);
   museumId?: number;
@@ -25,23 +25,22 @@ export class AdminModifyMuseum {
   ngOnInit(): void {
      this.museumForm = this.fb.group({
       id: [0],
-      photo: ['photos/'],
-      name: [''],
-      location: [''],
+      photo: ['photos/',Validators.required],
+      name: ['',[Validators.required ,Validators.minLength(2)]],
+      location: ['',[Validators.required,Validators.minLength(2)]],
       is_open: [1],
-       entry_price: [0],
+       entry_price: [0,[Validators.required ,Validators.min(0.1)]],
       opening_hour:['00:00'],
       closing_hour:['00:00'],
       category: ['Archaeological'],
       created_at: [''],
-      description: ['',]
+      description: ['',Validators.required]
     });
      this.museumId=Number(this.route.snapshot.paramMap.get('id'));
       this.museumService.getMuseumById(this.museumId).subscribe(
       data => {
         console.log(data)
         this.museum = data;
-       
         this.museumForm.patchValue({
         id: this.museum.id,
         photo: this.museum.photo,

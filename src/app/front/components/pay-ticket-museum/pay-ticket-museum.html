@@ -15,7 +15,7 @@
                 <label for="museum">Musée</label>
                 <div id="museum"  aria-label="Musée sélectionné" class="input-group">
                  @if(museum){
-                   {{ museum.name }}
+                   {{ museum?.name }}
                  }
                 </div>
               </div>
@@ -71,6 +71,18 @@
                 @if(paymentForm.get('visitDetails.promoCode')?.touched && paymentForm.get('visitDetails.promoCode')?.errors?.['invalidPromo'])
         { <div class="error-message input-group promo-code">Code promo invalide.</div> }
         </div>
+                <div class="form-row special-requests"  formArrayName="specialRequests">
+          <label>Demandes spéciales</label>
+          <button type="button" class="btn-add" (click)="addSpecialRequest()">Ajouter une demande</button>
+          @for(request of specialRequests.controls; track $index) {
+            <div class="special-request-input">
+              <input type="text" [formControlName]="$index" placeholder="Ex : Fauteuil roulant, Guide touristique…" />
+              <button type="button" (click)="removeSpecialRequest($index)">Supprimer</button>
+            </div>
+          }
+        </div>
+       
+
       </fieldset>
       <fieldset class="payment-info">
         <legend>Informations de paiement</legend>
@@ -88,7 +100,7 @@
         @else if(paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.errors?.['minlength'])
         { <div class="error-message">Le nom doit contenir au moins 5 caractères.</div> }
         @else if(paymentForm.get('cardName')?.touched && paymentForm.get('cardName')?.errors?.['pattern'])
-        { <div class="error-message">Le nom doit être en majuscules.</div> }
+        { <div class="error-message">Le nom doit être en majuscules et complet.</div> }
 
         <div class="form-row card-number">
           <label for="card-number">Numéro de carte</label>
@@ -148,16 +160,28 @@
         <dl class="order-details">
           <div class="order-row">
             <dt>Musée sélectionné</dt>
-            <dd>{{museum.name}}</dd>
+            <dd>{{museum?.name}}</dd>
           </div>
           <div class="order-row">
             <dt>Date & heure</dt>
             <dd>{{ paymentForm.get('visitDetails.visitDate')?.value | date: 'dd MMM' }}, {{ paymentForm.get('visitDetails.timeSlot')?.value | startHour}}</dd>
           </div>
           <div class="order-row">
-            <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × {{ paymentForm.get('visitDetails.ticketType')?.value}})</dt>
+            
+              @if( paymentForm.get('visitDetails.ticketType')?.value=='adult'){
+                <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × Adulte) </dt>
+              }
+           @if( paymentForm.get('visitDetails.ticketType')?.value=='child'){
+                <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × Enfant) </dt>
+              }
+              @if( paymentForm.get('visitDetails.ticketType')?.value=='student'){
+                <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × Étudiant) </dt>
+              }
+               @if( paymentForm.get('visitDetails.ticketType')?.value=='group'){
+                <dt>Billets ({{ paymentForm.get('visitDetails.ticketCount')?.value}} × Groupe(5)) </dt>
+              }
            @if(museum){
-             <dd>{{totalTicketsAmount}}</dd>
+             <dd>{{totalTicketsAmount | number}}</dd>
            }
           </div>
           <div class="order-row">

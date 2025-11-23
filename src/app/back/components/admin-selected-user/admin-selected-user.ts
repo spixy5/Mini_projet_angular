@@ -4,6 +4,7 @@ import { ServiceUser } from '../../../services/service-user';
 import { User } from '../../../models/user';
 import { DatePipe } from '@angular/common';
 import { Comment } from '../../../models/comment';
+import { Ticket } from '../../../models/ticket';
 
 @Component({
   selector: 'app-admin-selected-user',
@@ -17,18 +18,26 @@ export class AdminSelectedUser implements OnInit{
   userId!:number;
   user!:User;
   comments:Comment[]=[];
+  tickets:Ticket[]=[];
   ngOnInit(): void {
      this.userId=Number(this.route.snapshot.paramMap.get('id'));
      this.userService.getUserById(this.userId).subscribe(
-      data=> {this.user=data.user
-        this.userService.getAllComments(this.user.email).subscribe(
-          data => {console.log(data)
+      data=> {
+        this.user=data.user
+        this.userService.getCommentsByUser(this.user.email).subscribe(
+          data => {
+            console.log(data)
             this.comments=data.comments
             
           }
-        )
-
-        
+        )  
+          this.userService.getTicketsByUser(this.user.email).subscribe(
+          data => {
+            console.log(data)
+            this.tickets=data.tickets
+            
+          }
+        ) 
       }
      )
   }

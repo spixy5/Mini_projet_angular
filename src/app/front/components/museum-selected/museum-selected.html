@@ -30,7 +30,7 @@
                   <b>Catégorie</b>
                   <span class="category">· {{ museum.category }}</span>
                 </div>
-                <p class="museum-description"><b>Célèbre</b> pour sa collection exceptionnelle de mosaïques romaines, le Musée national du Bardo retrace plusieurs millénaires d'histoire tunisienne à travers des galeries richement documentées et une scénographie claire et pédagogique. Des expositions temporaires mettent en lumière les échanges culturels de la Méditerranée.</p>
+                <p class="museum-description"> {{museum.description}} </p>
               </div>
            
             </div>
@@ -54,18 +54,7 @@
 
           <div class="meta-item">
             <label><i class="bi bi-tags"></i> Catégorie</label>
-           <p>
-                @if(museum.category == 'Archaeological')
-                 { Archéologique}
-                @if(museum.category == 'Ethnographic')
-                  {Ethnographique}
-                @if(museum.category == 'Islamic Art')
-                 { Art Islamique}
-                @if(museum.category == 'Traditional Arts')
-                  {Arts Traditionnels}
-                @if(museum.category == 'Modern Art')
-                 { Art Moderne}
-              </p>
+           <p> {{museum.category}} </p>
           </div>
 
           <div class="meta-item">
@@ -99,8 +88,15 @@
         </div>
         
         </div>
-         
-       
+          @if(weather?.current){
+        <div class="meta-item weather-card">
+          <label><i class="bi bi-cloud-sun"></i> Météo à {{museum?.location}}</label>
+          <p>
+            {{ weather.current.temperature }}°C, {{ weather.current.summary }}
+          </p>
+        </div>
+      }
+
 
       <section class="comments-section mt-5">
         <h2 class="comments-title d-flex justify-content-between align-items-center mb-3">

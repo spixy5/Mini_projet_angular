@@ -18,14 +18,14 @@ readonly museumService:ServiceMuseum = inject(ServiceMuseum);
 readonly userService:ServiceUser=inject(ServiceUser)
   museumId?: number;
   museum!: Museum;
-  userRole=localStorage.getItem('role')
+  userRole=localStorage.getItem('role');
+  weather:any;
   ngOnInit(): void {
   this.museumId=Number(this.route.snapshot.paramMap.get('id'));
      if(this.museumId){
         this.museumService.updateMuseumVisits(this.museumId).subscribe();
        this.museumService.getMuseumById(this.museumId).subscribe(
       data => {
-        console.log(data)
         this.museum=data;
         if(this.museum.id){
           this.museumService.getAllComments(this.museum.id).subscribe(
@@ -46,10 +46,20 @@ readonly userService:ServiceUser=inject(ServiceUser)
         data=>console.log(data)
       )
       }
-      
+      this.museumService.getWeather(this.museum.location).subscribe(
+           data => {
+            this.weather = data;
+            console.log('Weather:', data);
+          },
+       );
     });
      }
+
+
+    
+
   }
+ 
   onBuyTicketClick() {
     const userId = localStorage.getItem('userId'); 
     if (userId) {
@@ -62,7 +72,7 @@ readonly userService:ServiceUser=inject(ServiceUser)
       this.router.navigate(['/login']);
     }
   }
-    onItineraryClick(name: string | undefined, location: string | undefined) {
+  onItineraryClick(name: string | undefined, location: string | undefined) {
    if(location && name){
      const query = encodeURIComponent(`${name} ${location}`);
   window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');

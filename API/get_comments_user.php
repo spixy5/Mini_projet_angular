@@ -16,10 +16,7 @@ if (!$userEmail) {
     exit();
 }
 
-$sql = "SELECT mc.*, m.name AS museum_name 
-        FROM museum_comments mc
-        LEFT JOIN museums m ON mc.museum_id = m.id
-        WHERE mc.author_email = '$userEmail'";
+$sql = "SELECT * FROM museum_comments WHERE author_email='$userEmail'";
 
 $result = mysqli_query($conn, $sql);
 
@@ -32,10 +29,7 @@ if (!$result) {
 }
 
 $comments = [];
-$museumNames = [];
-
 while ($row = mysqli_fetch_assoc($result)) {
-    $museumNames[] = $row['museum_name'];
     unset($row['museum_name']);  
     $comments[] = $row;
 }
@@ -43,7 +37,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 echo json_encode([
     "success" => true,
     "comments" => $comments,
-    "museumnames" => $museumNames
 ]);
 
 mysqli_close($conn);

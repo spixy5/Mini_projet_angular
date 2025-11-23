@@ -75,7 +75,12 @@ import { User } from '../../../models/user';
 
 calculatePerformance(museum: Museum): number {
   const visits= Number(museum.visits) || 0;
-  const tickets=Number(museum.tickets) || 0;
+  var tickets= 0;
+  if(museum.tickets){
+     for(let t of museum.tickets){
+     tickets+=1*t.numberOfTickets;
+  }
+  }
   if (visits==0) return 0;
   const percentage=(tickets / visits) * 200 - 100;
   return Math.round(percentage);
