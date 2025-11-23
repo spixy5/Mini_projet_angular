@@ -2,21 +2,13 @@
 header("Access-Control-Allow-Origin: http://localhost:4200");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Type");
-
-// Get region from query, default to Tunis
 $region = $_GET['region'] ?? 'Tunis'; 
-
-// Encode region + country
 $query = urlencode($region . ', Tunisia');
-
-// Nominatim URL
 $geocode_url = "https://nominatim.openstreetmap.org/search?q={$query}&format=json&limit=1";
-
-// Initialize cURL for geocoding
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $geocode_url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0'); // Required by Nominatim
+curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0'); 
 $response = curl_exec($ch);
 $curlError = curl_error($ch);
 curl_close($ch);

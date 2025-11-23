@@ -15,7 +15,7 @@
                 <label for="museum">Musée</label>
                 <div id="museum"  aria-label="Musée sélectionné" class="input-group">
                  @if(museum){
-                   {{ museum?.name }}
+                   {{ museum.name }}
                  }
                 </div>
               </div>
@@ -160,7 +160,9 @@
         <dl class="order-details">
           <div class="order-row">
             <dt>Musée sélectionné</dt>
-            <dd>{{museum?.name}}</dd>
+            @if(museum){
+              <dd>{{museum.name}}</dd>
+            }
           </div>
           <div class="order-row">
             <dt>Date & heure</dt>

@@ -52,7 +52,7 @@ toggleLike(userId: number, commentId: number): Observable<any> {
   return this.http.post<any>(`${this.URL}/toggle_like.php`, {user_id: userId,comment_id: commentId});
 }
 getWeather(region: string): Observable<any> {
-    return this.http.get<any>(`${this.URL}/weather.php?region=${encodeURIComponent(region)}`);
+    return this.http.get<any>(`${this.URL}/weather.php?region=${region}`);
   }
 
 }

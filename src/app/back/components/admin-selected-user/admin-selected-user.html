@@ -1,8 +1,9 @@
-<div class="user-detail-root">
+@if(user){
+  <div class="user-detail-root">
       <header class="ud-header">
     <div class="ud-title">
       <h1>Détail utilisateur</h1>
-      <p class="ud-id">ID #{{ user?.id }} – Gestion des droits, suspensions et activité</p>
+      <p class="ud-id">ID #{{ user.id }} – Gestion des droits, suspensions et activité</p>
     </div>
   </header>
   <section class="card profile-card">
@@ -12,22 +13,22 @@
       <i class="bi bi-person-circle profile-icon"></i>
 
       <div class="profile-text">
-        <p><strong>Nom :</strong> {{ user?.name }}</p>
-        <p><strong>Email :</strong> {{ user?.email }}</p>
-        <p><strong>ID :</strong> {{ user?.id }}</p>
+        <p><strong>Nom :</strong> {{ user.name }}</p>
+        <p><strong>Email :</strong> {{ user.email }}</p>
+        <p><strong>ID :</strong> {{ user.id }}</p>
         <div class="badges-wrap">
           <span class="badge badge-primary">
-            <i class="bi bi-person-fill"></i> Rôle : {{ user?.role }}
+            <i class="bi bi-person-fill"></i> Rôle : {{ user.role }}
           </span>
 
           <span 
-            class="badge" [class.badge-success]="user?.banned==0" [class.badge-danger]="user?.banned==1">
-            <i class="bi" [class.bi-check-circle]="user?.banned==0" [class.bi-x-circle]="user?.banned==1"></i> 
-            {{ user?.banned==1 ? 'Banni' : 'Non Banni' }}
+            class="badge" [class.badge-success]="user.banned==0" [class.badge-danger]="user.banned==1">
+            <i class="bi" [class.bi-check-circle]="user.banned==0" [class.bi-x-circle]="user.banned==1"></i> 
+            {{ user.banned==1 ? 'Banni' : 'Non Banni' }}
           </span>
 
           <span class="badge badge-warning">
-            <i class="bi bi-exclamation-circle"></i> Suspensions : {{ user?.suspension }}
+            <i class="bi bi-exclamation-circle"></i> Suspensions : {{ user.suspension }}
           </span>
         </div>
       </div>
@@ -41,23 +42,21 @@
       <div class="stats-grid">
         <div class="stat">
           <label>Suspensions totales</label>
-          <div class="stat-input">{{ user?.suspension }}</div>
+          <div class="stat-input">{{ user.suspension }}</div>
         </div>
         <div class="stat">
           <label>Banni</label>
           <div class="stat-input">
-            {{ user?.banned==1 ? 'Oui' : 'Non' }}
+            {{ user.banned==1 ? 'Oui' : 'Non' }}
           </div>
         </div>
       </div>
 
       <div class="status-buttons">
-       @if(user){
          <button class="btn" [class.btn-success-outline]="user.banned==0 && user.suspension==0" [class.btn-danger-outline]="user.banned > 0" [class.btn-warning-outline]="user.banned==0 && user.suspension > 0">
             <i class="bi bi-shield-check"></i>
   {{ user.banned > 0 ? 'Compte restreint (banni: ' + user.banned + ')' : (user.suspension > 0 ? 'Compte limité (suspensions: ' + user.suspension + ')' : 'Compte sain') }}
 </button>
-       }
 
       </div>
     </section>
@@ -69,12 +68,12 @@
       <div class="activity-items">
         <div class="activity-box">
           <i class="bi bi-cursor-fill activity-ico" aria-hidden="true"></i>
-          Actions effectuées : {{ user?.activity_count }}
+          Actions effectuées : {{ user.activity_count }}
         </div>
         <div class="activity-box">
             
           <i class="bi bi-calendar-event activity-ico"></i>
-          Dernière connexion : {{ user?.last_login | date:'shortDate' }}
+          Dernière connexion : {{ user.last_login | date:'shortDate' }}
         </div>
         <div class="activity-box">
           <i class="bi bi-clock-history activity-ico"></i>
@@ -84,6 +83,7 @@
     </section>
   </div>
 </div>
+}
 <div class="comment_ticket">
 <div class="user-comments">
   <header>

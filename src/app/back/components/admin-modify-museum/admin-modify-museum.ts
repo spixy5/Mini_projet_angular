@@ -5,7 +5,6 @@ import { Museum } from '../../../models/museum';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { GetDatePipe } from '../../../pipe/get-date-pipe';
 import { ServiceUser } from '../../../services/service-user';
-
 @Component({
   selector: 'app-admin-modify-museum',
   imports: [ReactiveFormsModule,RouterLink],
@@ -39,7 +38,6 @@ export class AdminModifyMuseum {
      this.museumId=Number(this.route.snapshot.paramMap.get('id'));
       this.museumService.getMuseumById(this.museumId).subscribe(
       data => {
-        console.log(data)
         this.museum = data;
         this.museumForm.patchValue({
         id: this.museum.id,
@@ -54,7 +52,6 @@ export class AdminModifyMuseum {
         created_at: this.pipe.transform(this.museum.created_at),
         description: this.museum.description,
       });
-      console.log(this.museumForm.value)
       
     });
    

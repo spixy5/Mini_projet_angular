@@ -17,6 +17,7 @@ import { Admin } from './back/components/admin/admin';
 import { AdminSelectedUser } from './back/components/admin-selected-user/admin-selected-user';
 import { authadminGuard } from './guards/authadmin-guard';
 import { authuserGuard } from './guards/authuser-guard';
+import { Error } from './error/error';
   export const routes: Routes = [
 { path: 'home', component: Home, title: 'Accueil' },
 { path: 'login', component: LogIn, title: 'Connexion' },
@@ -36,6 +37,6 @@ import { authuserGuard } from './guards/authuser-guard';
 { path: 'admin/users', component: AdminUsers, title: 'Utilisateurs',canActivate:[authadminGuard] },
 { path: 'admin/user/:id', component: AdminSelectedUser, title: 'Utilisateur sélectionné' ,canActivate:[authadminGuard]},
 { path: 'admin/statistics', component: AdminStatistics, title: 'Statistiques' ,canActivate:[authadminGuard]},
-{ path: '', component: Home, title: 'Accueil' },
-{ path: '**', redirectTo: 'home' }
+{ path: '',redirectTo: 'home' ,pathMatch:'full' },
+{ path: '**', component: Error, title: 'error' }
   ];
