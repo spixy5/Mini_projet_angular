@@ -186,7 +186,7 @@ removeSpecialRequest(index: number) {
     data => {
       if (data.success) {
         alert('Paiement réussi ! Un email vous a été envoyé.');
-        this.router.navigate(['/museum'])
+        this.router.navigate(['/museums'])
           const userId = Number(localStorage.getItem('userId'));
         this.userService.updateActivity(userId).subscribe(
           data=>console.log(data)

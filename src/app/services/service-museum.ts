@@ -10,7 +10,7 @@ import { PromoCode } from '../models/promo-code';
 })
 export class ServiceMuseum {
     private http: HttpClient=inject(HttpClient);
-    private URL='http://localhost/www/Mini_prj/mini_prj_angular/API';
+    private URL='http://localhost/www/project_farah/Mini_projet_angular/API';
     private apiKey = 'logfjk7s8jjz3txed7ixvnknuhhd1h1201inorqv';
   getAllMuseums(): Observable<Museum[]> {
     return this.http.get<Museum[]>(`${this.URL}/get_all_museums.php`);

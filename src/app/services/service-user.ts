@@ -8,7 +8,7 @@ import { Comment } from '../models/comment';
 })
 export class ServiceUser {
    private http: HttpClient=inject(HttpClient);
-    private URL='http://localhost/www/Mini_prj/mini_prj_angular/API'
+    private URL='http://localhost/www/project_farah/Mini_projet_angular/API'
   login(email: string, password: string): Observable<any> {
   return this.http.post<any>(`${this.URL}/login.php`,{email, password });
 }
