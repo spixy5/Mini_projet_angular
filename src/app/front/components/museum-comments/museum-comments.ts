@@ -10,13 +10,30 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './museum-comments.html',
   styleUrl: './museum-comments.css',
 })
-export class MuseumComments  {
+export class MuseumComments  implements OnInit{
   readonly router:Router=inject(Router);
   readonly route: ActivatedRoute=inject(ActivatedRoute);
   readonly museumService: ServiceMuseum=inject(ServiceMuseum);
   readonly userService: ServiceUser=inject(ServiceUser);
-   @Input() comments!: Comment[]; 
-   @Input() museum_id!:number;
+  museum_id!:number;
+  comments!:Comment[];
+ ngOnInit(): void {
+    this.museum_id=Number(this.route.parent?.snapshot.paramMap.get('id'));
+        if(this.museum_id){
+          this.museumService.getAllComments(this.museum_id).subscribe(
+          data => {
+         if (data.success) {
+           this.comments=data.comments;
+      } else {
+        console.error('Failed to load comments');
+    
+      }
+      },
+   
+    );
+        }
+
+ }
    message: string = '';
 onSubmitComment() {
     if(this.message!=""){

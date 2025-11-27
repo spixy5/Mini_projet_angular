@@ -1,7 +1,7 @@
 <div class="comments-section">
   <div class="comments-header">
     <h3>Commentaires</h3>
-    <span class="comments-count">{{ comments.length }} avis</span>
+    <span class="comments-count">{{ comments?.length }} avis</span>
   </div>
   <ul class="comments-list">
     @for(comment of comments ;track comment.id)

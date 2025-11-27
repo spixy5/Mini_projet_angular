@@ -309,6 +309,7 @@ button.btn-buy-ticket:hover {
 }
 
 .comments-title {
+  cursor: pointer;
   font-weight: 700;
   font-size: 1.25rem;
   color: #0b1220;

@@ -4,7 +4,6 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include 'db_connection.php';
-
 $data = json_decode(file_get_contents('php://input'), true);
 $email = isset($data['email']) ? $data['email'] : '';
 $password = isset($data['password']) ? $data['password'] : '';

@@ -99,13 +99,13 @@
 
 
       <section class="comments-section mt-5">
-        <h2 class="comments-title d-flex justify-content-between align-items-center mb-3">
+        <h2 class="comments-title d-flex justify-content-between align-items-center mb-3" [routerLink]="['comments']">
           Commentaires
           <span class="comments-count badge">{{ museum.comments?.length || 0 }} avis</span>
         </h2>
         @if(museum.id){
           <div class="comments-links mt-4">
-            <app-museum-comments [comments]="museum.comments || []" [museum_id]="museum.id"></app-museum-comments>
+            <router-outlet></router-outlet>
           </div>
         }
       </section>

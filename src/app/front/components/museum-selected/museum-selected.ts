@@ -1,13 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Museum } from '../../../models/museum';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ServiceMuseum } from '../../../services/service-museum';
 import { DatePipe } from '@angular/common';
-import { MuseumComments } from '../museum-comments/museum-comments';
 import { ServiceUser } from '../../../services/service-user';
 @Component({
   selector: 'app-museum-selected',
-  imports: [DatePipe,MuseumComments,RouterLink],
+  imports: [DatePipe,RouterLink,RouterOutlet],
   templateUrl: './museum-selected.html',
   styleUrl: './museum-selected.css',
 })
