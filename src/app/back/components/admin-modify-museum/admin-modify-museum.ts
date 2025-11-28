@@ -31,7 +31,7 @@ export class AdminModifyMuseum {
        entry_price: [0,[Validators.required ,Validators.min(0.1)]],
       opening_hour:['00:00'],
       closing_hour:['00:00'],
-      category: ['Archaeological'],
+      category: [''],
       created_at: [''],
       description: ['',Validators.required]
     });
